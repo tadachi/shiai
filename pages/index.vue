@@ -9,7 +9,8 @@
         Web kendo tournament bracket generator.
       </h2>
       <hello/>
-      <bracket-unit/>
+      <score-card/>
+      <button @click="$store.commit('increment')">{{ $store.state.counter }}</button>
     </div>
   </section>
 </template>
@@ -17,13 +18,13 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import Hello from '~/components/Hello.vue'
-import BracketUnit from '~/components/BracketUnit.vue'
+import ScoreCard from '~/components/ScoreCard.vue'
 
 export default {
   components: {
     Logo,
     Hello,
-    BracketUnit
+    ScoreCard
   }
 }
 </script>
