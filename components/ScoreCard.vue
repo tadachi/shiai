@@ -1,24 +1,23 @@
 <template>
-  
-  <div class="background">
-    <img class="dotted" src="~/assets/edit-pencil.svg" width="80px">
-    <div class="dotted box"></div>
-    <div class="img-wrap">
-      <img class="dotted close" src="~/assets/delete.svg" width="20px" height="20px">
-      <img class="dotted ippon" src="~/assets/men.svg">
-    </div>
-    <!-- <div class="dotted" id="score-card">
-      <div v-for="(value, key, index) in ippons">
-        {{ value.ippon }} {{ index }}
+  <div class="container background">
+    ScoreCard
+    <div class="dotted" id="score-card">
+      <img class="dotted edit" src="~/assets/edit-pencil.svg" width="40px">
+      <div v-for="(ippon, key, index) in $store.state.ippons" :key="key">
+        <div class="wrap">
+          <img class="dotted close" src="~/assets/delete.svg" width="20px" height="20px">
+          <img class="dotted ippon" src="~/assets/men.svg" width="60px">
+        </div>
       </div>
-    </div> -->
+      <div class="dotted box"></div>
+    </div>
   </div>
 </template>
 
 <script>
 </script>
 
-<style>
+<style scoped>
 .background {
   background-color: Cornsilk;
 }
@@ -27,8 +26,6 @@
 }
 .ippon {
   display: inline-block;
-  width: 100px;
-  height: 100px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -43,7 +40,6 @@
 
 /* Create a simple white box, and add the shadow for the initial state */
 .box {
-  position: relative;
   display: inline-block;
   width: 100px;
   height: 100px;
@@ -79,13 +75,12 @@
   opacity: 1;
 }
 
-.img-wrap {
+.wrap {
     position: relative;
     display: inline-block;
-    font-size: 0;
 }
 
-.img-wrap .close {
+.wrap .close {
     position: absolute;
     top: 2px; /* Moves to to the right corner of image */
     right: 2px;
@@ -95,7 +90,18 @@
     opacity: 0;
 }
 
-.img-wrap:hover .close {
+.wrap .edit {
+    position: absolute;
+    top: -2px; /* Moves to to the right corner of image */
+    right: -20px;
+    z-index: 100;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 1;
+}
+
+
+.wrap:hover .close {
     opacity: 1;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container-nuxt">
     <div>
       <logo/>
       <h1 class="title">
@@ -8,29 +8,28 @@
       <h2 class="subtitle">
         Web kendo tournament bracket generator.
       </h2>
-      <hello/>
       <score-card/>
-      <button @click="$store.commit('increment')">{{ $store.state.counter }}</button>
+      <round-robin/>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-import Hello from '~/components/Hello.vue'
 import ScoreCard from '~/components/ScoreCard.vue'
+import RoundRobin from '~/components/RoundRobin.vue'
 
 export default {
   components: {
     Logo,
-    Hello,
-    ScoreCard
+    ScoreCard,
+    RoundRobin
   }
 }
 </script>
 
-<style>
-.container {
+<style scoped>
+.container-nuxt {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -53,5 +52,9 @@ export default {
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
+}
+
+.dotted {
+  border-style: dotted;
 }
 </style>
