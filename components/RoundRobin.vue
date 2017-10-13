@@ -1,18 +1,43 @@
 <template>
-  <div class="container background">
-    <div>Round Robin</div>
-    <div v-for="(participant, index, key) in $store.state.participants" :key="key">
-      <div class="columns is-mobile is-multiline">
-        <div v-for="(participant, index, key) in $store.state.participants" :key="key">
-          <div class="column dotted">
-            <div v-if="index == 0">
-              xxxx
-            </div>
-            <div v-else>
-              xxxxxxx
-            </div>
-            
-          </div>
+  <div class="container is-fluid background separation">
+    <!-- <div class="columns is-mobile">
+      <div class="column dotted">
+        Round Robin
+      </div>
+      <div class="column dotted">
+        Round Robin
+      </div>
+      <div class="column dotted">
+        Round Robin
+      </div>
+    </div>
+    <div class="columns is-mobile">
+      <div class="column dotted">
+        Round Robin
+      </div>
+      <div class="column dotted">
+        Round Robin
+      </div>
+      <div class="column dotted">
+        Round Robin
+      </div>
+      <div class="column dotted">
+        Round Robin
+      </div>    
+    </div> -->
+    <div class="columns is-mobile" v-for="(participant, n) in $store.state.participants" :key="n">
+      <div class="column dotted" v-for="(participant, m) in $store.state.participants" :key="m" >
+        <div v-if="n <= 0">
+          {{participant}}
+        </div>
+        <div v-else-if="m <= 0">
+          {{$store.state.participants[n]}}
+        </div>
+        <div v-else-if="m == n">
+          xxxx
+        </div>
+        <div v-else>
+          xxxxxxxxx
         </div>
       </div>
     </div>

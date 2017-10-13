@@ -1,16 +1,14 @@
 <template>
-  <div class="container background">
+  <div class="container is-fluid background separation">
     ScoreCard
-    <div class="dotted" id="score-card">
-      <img class="dotted edit" src="~/assets/edit-pencil.svg" width="40px">
-      <div v-for="(ippon, key, index) in $store.state.ippons" :key="key">
-        <div class="wrap">
-          <img class="dotted close" src="~/assets/delete.svg" width="20px" height="20px">
-          <img class="dotted ippon" src="~/assets/men.svg" width="60px">
-        </div>
+    <img class="dotted edit" src="~/assets/edit-pencil.svg" width="40px">
+    <div v-for="(ippon, key, index) in $store.state.ippons" :key="key">
+      <div class="wrap">
+        <img class="dotted close" src="~/assets/delete.svg" width="20px" height="20px">
+        <img class="dotted ippon" src="~/assets/men.svg" width="60px">
       </div>
-      <div class="dotted box"></div>
     </div>
+    <div class="dotted box"></div>
   </div>
 </template>
 
@@ -18,12 +16,18 @@
 </script>
 
 <style scoped>
+.separation {
+  margin-bottom: 40px;
+}
+
 .background {
   background-color: Cornsilk;
 }
+
 .dotted {
   border-style: dotted;
 }
+
 .ippon {
   display: inline-block;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);

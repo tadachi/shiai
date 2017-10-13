@@ -6,7 +6,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       ippons: [MEN, MEN, MEN],
-      participants: ['Takumi', 'Ming', 'Nick', 'Kirk', 'James', 'Patrick', 'Wilson', 'Chris']
+      participants: ['Round Robin', 'Takumi', 'Ming', 'Nick', 'Kirk', 'James', 'Patrick', 'Wilson', 'Chris']
     },
     mutations: {
       delete (state) {

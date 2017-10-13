@@ -1,0 +1,58 @@
+   <div v-for="(participant, index, key) in $store.state.participants" :key="key">
+      <div class="columns is-mobile is-multiline" v-if="index == 0">
+        <div v-for="(participant, index, key) in $store.state.participants" :key="key">
+          <div class="column dotted">
+              {{participant}}
+          </div>
+        </div>
+      </div>
+      <div class="columns is-mobile is-multiline">
+        <div v-for="(participant, index, key) in $store.state.participants" :key="key">
+          <div class="column dotted">
+            <div v-if="index == 0">
+              xxxx
+            </div>
+            <div v-else>
+              xxxxxxx
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div v-for="(participant, index, key) in $store.state.participants" :key="key">
+        <div class="column dotted">
+          {{participant}}
+        </div>
+      </div>
+
+      <div class="columns">
+      <div class="column dotted">
+        xxxxxxxxx
+      </div>
+            <div class="column dotted">
+        xxxxxxxxx
+      </div>
+            <div class="column dotted">
+        xxxxxxxxx
+      </div>
+            <div class="column dotted">
+        xxxxxxxxx
+      </div>
+            <div class="column dotted">
+        xxxxxxxxx
+      </div>
+            <div class="column dotted">
+        xxxxxxxxx
+      </div>
+            <div class="column dotted">
+        xxxxxxxxx
+      </div>
+            <div class="column dotted">
+        xxxxxxxxx
+      </div>
+            <div class="column dotted">
+        xxxxxxxxx
+      </div>
+      
+    </div>

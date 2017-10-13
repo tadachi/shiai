@@ -1,17 +1,14 @@
 <template>
-  <section class="container-nuxt">
-    <div>
-      <logo/>
-      <h1 class="title">
-        shiai
-      </h1>
-      <h2 class="subtitle">
-        Web kendo tournament bracket generator.
-      </h2>
-      <score-card/>
-      <round-robin/>
-    </div>
-  </section>
+  <div class="container">
+    <h1 class="title dotted">
+      shiai
+    </h1>
+    <h2 class="subtitle dotted">
+      Web kendo tournament bracket generator.
+    </h2>
+    <score-card/>
+    <round-robin/>
+  </div>
 </template>
 
 <script>
@@ -29,14 +26,6 @@ export default {
 </script>
 
 <style scoped>
-.container-nuxt {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
@@ -44,6 +33,7 @@ export default {
   font-size: 100px;
   color: #35495e;
   letter-spacing: 1px;
+  margin-bottom: 40px;
 }
 
 .subtitle {
@@ -51,7 +41,7 @@ export default {
   font-size: 42px;
   color: #526488;
   word-spacing: 5px;
-  padding-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .dotted {
