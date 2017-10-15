@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import {mutations} from './mutations'
 // import {MEN, KOTE, DOU, TSUKI} from '../store/shiai_constants'
 // import {MEN, KOTE, DOU, TSUKI, RED, WHITE, ONEPOINTMATCH, TWOPOINTMATCH, TWOTOONEMATCH, TIEMATCH} from '../store/shiai_constants'
 
@@ -9,14 +10,7 @@ const createStore = () => {
       participants: ['Round Robin', 'Takumi', 'Ming', 'Nick', 'Kirk', 'James', 'Patrick', 'Wilson'],
       score_card: create2DArray(12)
     },
-    mutations: {
-      delete (state) {
-        state.ippons.splice(0, 1)
-      },
-      add (state, payload) {
-        state.ippons.push(payload) // payload must be MEN, KOTE, DO, TSUKI
-      }
-    }
+    mutations
   })
 }
 

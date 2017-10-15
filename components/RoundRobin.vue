@@ -10,8 +10,26 @@
         </div>
         <div class="background-black-fill" v-else-if="m == n">
         </div>
-        <div v-else class="fill expand dotted is-size-4">
-          [{{n-1}}, {{m-1}}]
+        <div v-else class="fill expand dotted position-relative">
+          <div class="is-size-6">[{{n-1}}, {{m-1}}]</div>
+          <div class="menu">
+            <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: MEN})">
+              <img class="add" src="~/assets/add.svg" width="15px" height="15px">
+              <img src="~/assets/men.svg" width="40px">
+            </div>
+            <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: KOTE})">
+              <img class="add" src="~/assets/add.svg" width="15px" height="15px">
+              <img src="~/assets/kote.svg" width="40px">
+            </div>
+            <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: DOU})">
+              <img class="add" src="~/assets/add.svg" width="15px" height="15px">
+              <img src="~/assets/dou.svg" width="40px">
+            </div>
+            <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: TSUKI})">
+              <img class="add" src="~/assets/add.svg" width="15px" height="15px">
+              <img src="~/assets/tsuki.svg" width="40px">
+            </div>
+          </div>
           <!-- {{$store.state.score_card[n-1][m-1]}} -->
         </div>
       </div>
@@ -20,16 +38,21 @@
 </template>
 
 <script>
-// import {MEN, KOTE, DOU, TSUKI, RED, WHITE, ONEPOINTMATCH, TWOPOINTMATCH, TWOTOONEMATCH, TIEMATCH} from '../store/shiai_constants'
+import {MEN, KOTE, DOU, TSUKI} from '../store/shiai_constants'
+import {ADD_IPPON} from '../store/mutation-types'
 
 export default {
   data: () => {
     return {
+      MEN,
+      KOTE,
+      DOU,
+      TSUKI
     }
   },
   methods: {
-    toggleHello () {
-
+    addIppon (data) {
+      this.$store.commit(ADD_IPPON, data)
     }
   }
 }
@@ -123,21 +146,7 @@ function simulateRoundRobinKendoMatches (playerCount) {
     return Math.random() <= 0.3
   }
 
-  // 20% chance for Over Time
-  function encho () {
-    return Math.random() <= 0.2
-  }
-
-  // 60% chance for twoPointMatch
-  function twoPointMatch () {
-    return Math.random() <= 0.6
-  }
-
-  function twoToOnePointMatch () {
-    return Math.random() <= 0.4
-  }
-
-  // 20% chance for tie match
+  // 15% chance for tie match
   // function tieMatch () {
   //   return Math.random() <= 0.15
   // }
@@ -197,19 +206,22 @@ function simulateRoundRobinKendoMatches (playerCount) {
   background-color: red;
 }
 
+.position-relative {
+  position: relative;
+}
+
 .expand {
   display: inline-block;
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.12s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .expand::after {
   border-radius: 5px;
   position: absolute;
-  z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
@@ -217,14 +229,45 @@ function simulateRoundRobinKendoMatches (playerCount) {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   opacity: 0;
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.12s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Scale up  */
 .expand:hover {
-  transform: scale(1.6, 1.6);
+  transform: scale(2, 2);
+  z-index: 100;
 }
 
+.expand:hover .menu{
+  opacity: 1;
+}
 
+.menu {
+  position: absolute;
+  background-color: green;
+  z-index: inherit;
+  opacity: 0;
+  top: 0;
+  left: 100%;
+  width: 150px;
+  height: 100%;
+  border: 3px solid #73AD21;
+}
 
+.menu-item {
+  display: inline;
+}
+
+.wrap {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.wrap .add {
+  position: absolute;
+  top: -2px;
+  /* Moves to to the right corner of image */
+  right: -3px;
+  z-index: inherit;
+}
 </style>

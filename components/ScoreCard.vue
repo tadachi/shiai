@@ -109,7 +109,6 @@
   opacity: 1;
 }
 
-
 .wrap:hover .close {
   opacity: 1;
 }
