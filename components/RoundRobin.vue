@@ -1,7 +1,7 @@
 <template>
   <div class="section background modifiers">
     <div class="columns is-mobile is-size-6" v-for="(participant, n) in $store.state.participants" :key="n">
-      <div class="column standard-size is-marginless is-paddingless" v-for="(participant, m) in $store.state.participants" :key="m">
+      <div class="column dotted standard-size is-marginless is-paddingless" v-for="(participant, m) in $store.state.participants" :key="m">
         <div v-if="n <= 0">
           <h1 class="has-text-centered has-text-weight-bold has-text-centered centering is-size-5">{{participant}}</h1>
         </div>
@@ -12,6 +12,10 @@
         </div>
         <div v-else class="fill expand dotted position-relative">
           <div class="is-size-6">[{{n-1}}, {{m-1}}]</div>
+          <div v-for="(ippon, key) in $store.state.score_card[n-1][m-1].points" :key="key">
+            <!-- <img :src="'~/assets/' + MEN + '.svg'" width="40px"> -->
+            <img src="~/assets/men.svg" width="40px">
+          </div>
           <div class="menu">
             <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: MEN})">
               <img class="add" src="~/assets/add.svg" width="15px" height="15px">
@@ -29,11 +33,21 @@
               <img class="add" src="~/assets/add.svg" width="15px" height="15px">
               <img src="~/assets/tsuki.svg" width="40px">
             </div>
+            <div class="wrap">
+              <img src="~/assets/win.svg" width="40px">
+            </div>
+            <div class="wrap">
+              <img src="~/assets/lose.svg" width="40px">
+            </div>
+            <div class="wrap">
+              <img src="~/assets/tie.svg" width="40px">
+            </div>
           </div>
           <!-- {{$store.state.score_card[n-1][m-1]}} -->
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -203,7 +217,7 @@ function simulateRoundRobinKendoMatches (playerCount) {
 .fill {
   height: 100%;
   width: 100%;
-  background-color: red;
+  background-color:white;
 }
 
 .position-relative {

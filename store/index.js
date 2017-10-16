@@ -8,7 +8,7 @@ const createStore = () => {
     state: {
       count: 8,
       participants: ['Round Robin', 'Takumi', 'Ming', 'Nick', 'Kirk', 'James', 'Patrick', 'Wilson'],
-      score_card: create2DArray(12)
+      score_card: create2DArray(8)
     },
     mutations
   })
@@ -18,7 +18,8 @@ function create2DArray (rows) {
   let arr = []
   for (let n = 0; n < rows; n++) {
     for (let m = 0; m < rows; m++) {
-      arr[m] = []
+      arr.push([])
+      arr[n][m] = {'points': [], 'outcome': ''}
     }
   }
   return arr
