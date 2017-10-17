@@ -6,9 +6,9 @@ import {mutations} from './mutations'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      count: 8,
+      count: 7,
       participants: ['Round Robin', 'Takumi', 'Ming', 'Nick', 'Kirk', 'James', 'Patrick', 'Wilson'],
-      score_card: create2DArray(8)
+      round_robin_card: create2DArray(8)
     },
     mutations
   })

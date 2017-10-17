@@ -1,16 +1,29 @@
 <template>
   <div class="container is-fluid background separation dotted">
     <div>ScoreCard</div>
-    <img class="dotted edit" src="~/assets/edit-pencil.svg" width="40px">
+    <img class="dotted edit" src="~/static/edit-pencil.svg" width="40px">
     <div class="wrap">
-      <img class="dotted close" src="~/assets/delete.svg" width="20px" height="20px">
-      <img class="dotted ippon" src="~/assets/men.svg" width="60px">
+      <img class="dotted close" src="~/static/delete.svg" width="20px" height="20px">
+      <img class="dotted ippon" src="~/static/men.svg" width="60px">
     </div>
     <div class="dotted box"></div>
+    <div v-for="(participant, key) in $store.state.participants" :key="key">
+      <div v-if="key > 0">{{participant}}</div>
+    </div>
   </div>
 </template>
 
 <script>
+export default {
+  data: () => {
+    return {
+    }
+  },
+  methods: {
+  },
+  computed: {
+  }
+}
 </script>
 
 <style scoped>
@@ -34,11 +47,13 @@
   z-index: 0;
 }
 
+
 /* .ippon:hover {
   transform: scale(1.6, 1.6);
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 } */
+
 
 /* Create a simple white box, and add the shadow for the initial state */
 
@@ -69,15 +84,11 @@
 }
 
 /* Scale up the box */
-
 .box:hover {
   transform: scale(1.6, 1.6);
 }
 
-
-
 /* Fade in the pseudo-element with the bigger shadow */
-
 .box:hover::after {
   opacity: 1;
 }

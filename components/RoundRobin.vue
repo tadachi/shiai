@@ -1,49 +1,51 @@
 <template>
-  <div class="section background modifiers">
-    <div class="columns is-mobile is-size-6" v-for="(participant, n) in $store.state.participants" :key="n">
-      <div class="column dotted standard-size is-marginless is-paddingless" v-for="(participant, m) in $store.state.participants" :key="m">
+  <div class="section background modifier">
+    <div class="columns is-mobile is-size-6 is-centered" v-for="(participant, n) in $store.state.participants" :key="n">
+      <div :class="responsive" class="column dotted standard-size is-marginless is-paddingless is-centered is-narrow" v-for="(participant, m) in $store.state.participants" :key="m" v-on:click="changeXY(n,m)">
         <div v-if="n <= 0">
-          <h1 class="has-text-centered has-text-weight-bold has-text-centered centering is-size-5">{{participant}}</h1>
+          <h1 class="has-text-centered has-text-weight-bold has-text-centered is-size-5">{{participant}}</h1>
         </div>
-        <div class="has-text-centered has-text-weight-bold centering is-size-5" v-else-if="m <= 0">
+        <div class="has-text-centered has-text-weight-bold is-size-5" v-else-if="m <= 0">
           {{$store.state.participants[n]}}
         </div>
         <div class="background-black-fill" v-else-if="m == n">
         </div>
         <div v-else class="fill expand dotted position-relative">
-          <div class="is-size-6">[{{n-1}}, {{m-1}}]</div>
-          <div v-for="(ippon, key) in $store.state.score_card[n-1][m-1].points" :key="key">
-            <!-- <img :src="'~/assets/' + MEN + '.svg'" width="40px"> -->
-            <img src="~/assets/men.svg" width="40px">
+          <div class="is-size-6">[{{n}}, {{m}}]</div>
+          <div class=""><img class="dotted icon" src="~/static/edit-pencil.svg"></div>
+          <div class="wrap" v-for="(ippon, key) in $store.state.round_robin_card[n-1][m-1].points" :key="key" v-on:click="removeIppon({x: n-1, y: m-1, index: key})">
+            <img class="top-right-hidden" src="~/static/delete.svg" width="15px" height="15px">
+            <img :src="ippon + '.svg'" width="40px">
           </div>
-          <div class="menu">
-            <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: MEN})">
-              <img class="add" src="~/assets/add.svg" width="15px" height="15px">
-              <img src="~/assets/men.svg" width="40px">
+          <div :class="menu(m)" class="has-text-centered is-centered">
+          <!-- <div class="menu"> -->
+            <div class="wrap menu-item" v-on:click="addIppon({x: n-1, y: m-1, ippon: MEN})">
+              <img class="top-right super" src="~/static/add.svg">
+              <img class="icon" src="~/static/men.svg">
             </div>
-            <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: KOTE})">
-              <img class="add" src="~/assets/add.svg" width="15px" height="15px">
-              <img src="~/assets/kote.svg" width="40px">
+            <div class="wrap menu-item" v-on:click="addIppon({x: n-1, y: m-1, ippon: KOTE})">
+              <img class="top-right super" src="~/static/add.svg">
+              <img class="icon" src="~/static/kote.svg">
             </div>
-            <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: DOU})">
-              <img class="add" src="~/assets/add.svg" width="15px" height="15px">
-              <img src="~/assets/dou.svg" width="40px">
+            <div class="wrap menu-item" v-on:click="addIppon({x: n-1, y: m-1, ippon: DOU})">
+              <img class="top-right super" src="~/static/add.svg">
+              <img class="icon" src="~/static/dou.svg">
             </div>
-            <div class="wrap" v-on:click="addIppon({x: n-1, y: m-1, ippon: TSUKI})">
-              <img class="add" src="~/assets/add.svg" width="15px" height="15px">
-              <img src="~/assets/tsuki.svg" width="40px">
+            <div class="wrap menu-item" v-on:click="addIppon({x: n-1, y: m-1, ippon: TSUKI})">
+              <img class="top-right super" src="~/static/add.svg">
+              <img class="icon" src="~/static/tsuki.svg">
             </div>
-            <div class="wrap">
-              <img src="~/assets/win.svg" width="40px">
+            <div class="wrap menu-item">
+              <img class="icon" src="~/static/win.svg">
             </div>
-            <div class="wrap">
-              <img src="~/assets/lose.svg" width="40px">
+            <div class="wrap menu-item">
+              <img class="icon" src="~/static/lose.svg">
             </div>
-            <div class="wrap">
-              <img src="~/assets/tie.svg" width="40px">
+            <div class="wrap menu-item">
+              <img class="icon" src="~/static/tie.svg">
             </div>
           </div>
-          <!-- {{$store.state.score_card[n-1][m-1]}} -->
+          <!-- {{$store.state.round_robin_card[n-1][m-1]}} -->
         </div>
       </div>
     </div>
@@ -52,8 +54,8 @@
 </template>
 
 <script>
-import {MEN, KOTE, DOU, TSUKI} from '../store/shiai_constants'
-import {ADD_IPPON} from '../store/mutation-types'
+import { MEN, KOTE, DOU, TSUKI } from '../store/shiai_constants'
+import { ADD_IPPON, REMOVE_IPPON } from '../store/mutation-types'
 
 export default {
   data: () => {
@@ -61,12 +63,34 @@ export default {
       MEN,
       KOTE,
       DOU,
-      TSUKI
+      TSUKI,
+      x: 0,
+      y: 0
+    }
+  },
+  computed: {
+    responsive: () => {
+      // return 'is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd'
+      // return ''
     }
   },
   methods: {
     addIppon (data) {
       this.$store.commit(ADD_IPPON, data)
+    },
+    removeIppon (data) {
+      this.$store.commit(REMOVE_IPPON, data)
+    },
+    menu (i) {
+      if (i < this.$store.state.count - 1) {
+        return 'menu'
+      } else {
+        return 'menu-left'
+      }
+    },
+    changeXY (x, y) {
+      this.x = x
+      this.y = y
     }
   }
 }
@@ -205,23 +229,25 @@ function simulateRoundRobinKendoMatches (playerCount) {
   width: 100%;
 }
 
-.centering {
-  margin-top: 50px;
-}
-
 .standard-size {
-  min-width: 150px;
+  min-width: 125px;
+  max-width: 125px;
   min-height: 175px;
 }
 
 .fill {
   height: 100%;
   width: 100%;
-  background-color:white;
+  background-color: white;
 }
 
 .position-relative {
   position: relative;
+}
+
+.word-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .expand {
@@ -251,7 +277,11 @@ function simulateRoundRobinKendoMatches (playerCount) {
   z-index: 100;
 }
 
-.expand:hover .menu{
+.expand:hover .menu {
+  opacity: 1;
+}
+
+.expand:hover .menu-left {
   opacity: 1;
 }
 
@@ -262,7 +292,19 @@ function simulateRoundRobinKendoMatches (playerCount) {
   opacity: 0;
   top: 0;
   left: 100%;
-  width: 150px;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #73AD21;
+}
+
+.menu-left {
+  position: absolute;
+  background-color: green;
+  z-index: inherit;
+  opacity: 0;
+  top: 0;
+  right: 100%;
+  width: 35%;
   height: 100%;
   border: 3px solid #73AD21;
 }
@@ -275,13 +317,36 @@ function simulateRoundRobinKendoMatches (playerCount) {
   position: relative;
   display: inline-block;
   cursor: pointer;
+  margin: 1px;
 }
 
-.wrap .add {
+.wrap .top-right {
   position: absolute;
   top: -2px;
   /* Moves to to the right corner of image */
   right: -3px;
   z-index: inherit;
+}
+
+.wrap .top-right-hidden {
+  position: absolute;
+  top: -2px;
+  /* Moves to to the right corner of image */
+  right: -3px;
+  z-index: inherit;
+  opacity: 0;
+}
+
+.icon {
+  width: 30px;
+}
+
+.super {
+  width: 13px;
+  height: 13px;
+}
+
+.wrap:hover .top-right-hidden {
+  opacity: 1;
 }
 </style>
