@@ -12,13 +12,11 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 import ScoreCard from '~/components/ScoreCard.vue'
 import RoundRobin from '~/components/RoundRobin.vue'
 
 export default {
   components: {
-    Logo,
     ScoreCard,
     RoundRobin
   }
@@ -31,15 +29,15 @@ export default {
 }
 
 .background-gradient {
-  background: royalblue;
+  background: #313233;
   /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, royalblue, darkblue);
+  background: -webkit-linear-gradient(left, black, #313233);
   /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, royalblue, darkblue);
+  background: -o-linear-gradient(right, black, #313233);
   /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, royalblue, darkblue);
+  background: -moz-linear-gradient(right, black, #313233);
   /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, royalblue, darkblue);
+  background: linear-gradient(to right, black, #313233);
   /* Standard syntax */
 }
 
@@ -49,7 +47,7 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: black;
+  color: white;
   letter-spacing: 1px;
   margin-bottom: 40px;
   padding-left: 10px;
@@ -58,7 +56,7 @@ export default {
 .subtitle {
   font-weight: 300;
   font-size: 42px;
-  color: black;
+  color: white;
   word-spacing: 5px;
   margin-bottom: 20px;
   padding-left: 10px;
