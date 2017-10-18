@@ -1,50 +1,62 @@
 <template>
   <div class="section background modifier">
     <div class="columns is-mobile is-size-6 is-centered" v-for="(participant, n) in $store.state.participants" :key="n">
-      <div :class="responsive" class="column dotted standard-size is-paddingless is-centered is-narrow" v-for="(participant, m) in $store.state.participants" :key="m" v-on:click="changeXY(n,m)">
+      <div :class="responsive" class="column dotted standard-size is-paddingless is-centered is-narrow" v-for="(participant, m) in $store.state.participants" :key="m">
         <div v-if="n <= 0">
           <h1 class="has-text-centered has-text-weight-bold has-text-centered is-size-5 has-text-white">{{participant}}</h1>
         </div>
         <div class="has-text-centered has-text-weight-bold is-size-5 has-text-white" v-else-if="m <= 0">
-          {{$store.state.participants[n]}}
+          <div>{{$store.state.participants[n]}}</div>
+          <div>{{$store.state.score_card[n].wins}}-{{$store.state.score_card[n].losses}}-{{$store.state.score_card[n].ties}} / {{$store.state.score_card[n].points}}P</div>
         </div>
         <div class="background-black-fill" v-else-if="m == n">
         </div>
-        <div v-else class="fill expand dotted has-text-white">
+        <div v-else :class="$store.state.round_robin_card[n][m].outcome" class="fill expand dotted has-text-white"> <!-- $store.state...outcome is win or lose. check .win and .lose class for more info -->
           <div class="has-text-centered">
-            <div class="is-size-6">[{{n}}, {{m}}]</div>
-            <div class="wrap" v-for="(ippon, key) in $store.state.round_robin_card[n-1][m-1].points" :key="key" v-on:click="removeIppon({x: n-1, y: m-1, index: key})">
-              <img class="top-right-hidden" src="~/static/delete.svg" width="15px" height="15px">
-              <img :src="ippon + '.svg'" width="40px">
+            <div class="is-size-6 has-text-black">[{{n}}, {{m}}]</div>
+            <div class="fill-width-only">
+              <div class="wrap" v-for="(ippon, key) in $store.state.round_robin_card[n][m].points" :key="key" v-on:click="removeIppon({x: n, y: m, index: key})">
+                <img class="top-right-hidden super" src="~/static/delete.svg">
+                <img class="medium-icon":src="ippon + '.svg'">
+              </div>
+            </div>
+            <div class="wrap" v-on:click="resetOutcome({x: n, y: m})">
+              <img class="top-right-hidden super" src="~/static/delete.svg">
+              <img class="big-icon" v-if="$store.state.round_robin_card[n][m].outcome == 'win'" :src="$store.state.round_robin_card[n][m].outcome + '.svg'">
+              <img class="big-icon" v-if="$store.state.round_robin_card[n][m].outcome == 'tie'" :src="$store.state.round_robin_card[n][m].outcome + '.svg'">
             </div>
           </div>
-          <div class="menu-left has-text-white">
-            <div class="dotted">
+          <div class="menu-left has-text-black dotted">
+            <div>
               <div class="has-text-centered">
-                <div class="wrap menu-item" v-on:click="addIppon({x: n-1, y: m-1, ippon: MEN})">
+                <div class="is-size-6 has-text-black">[{{n}}, {{m}}]</div>
+                <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: MEN})">
                   <img class="top-right super" src="~/static/add.svg">
                   <img class="icon" src="~/static/men.svg">
                 </div>
-                <div class="wrap menu-item" v-on:click="addIppon({x: n-1, y: m-1, ippon: KOTE})">
+                <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: KOTE})">
                   <img class="top-right super" src="~/static/add.svg">
                   <img class="icon" src="~/static/kote.svg">
                 </div>
-                <div class="wrap menu-item" v-on:click="addIppon({x: n-1, y: m-1, ippon: DOU})">
+                <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: DOU})">
                   <img class="top-right super" src="~/static/add.svg">
                   <img class="icon" src="~/static/dou.svg">
                 </div>
-                <div class="wrap menu-item" v-on:click="addIppon({x: n-1, y: m-1, ippon: TSUKI})">
+                <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: TSUKI})">
                   <img class="top-right super" src="~/static/add.svg">
                   <img class="icon" src="~/static/tsuki.svg">
                 </div>
-                <div class="wrap menu-item">
+                <div class="wrap menu-item" v-if="!$store.state.round_robin_card[n][m].outcome" v-on:click="setWin({x: n, y: m, outcome: WIN})">
                   <img class="icon" src="~/static/win.svg">
                 </div>
-                <div class="wrap menu-item">
+                <div class="wrap menu-item" v-if="!$store.state.round_robin_card[n][m].outcome" v-on:click="setLose({x: n, y: m, outcome: LOSE})">
                   <img class="icon" src="~/static/lose.svg">
                 </div>
-                <div class="wrap menu-item">
+                <div class="wrap menu-item" v-if="!$store.state.round_robin_card[n][m].outcome" v-on:click="setTie({x: n, y: m, outcome: TIE})" >
                   <img class="icon" src="~/static/tie.svg">
+                </div>
+                <div class="wrap menu-item" v-on:click="resetOutcome({x: n, y: m})" >
+                  <img class="icon" src="~/static/clear.svg">
                 </div>
               </div>
             </div>
@@ -58,8 +70,8 @@
 </template>
 
 <script>
-import { MEN, KOTE, DOU, TSUKI } from '../store/shiai_constants'
-import { ADD_IPPON, REMOVE_IPPON } from '../store/mutation-types'
+import { MEN, KOTE, DOU, TSUKI, WIN, LOSE, TIE } from '../store/shiai_constants'
+import { ADD_IPPON, REMOVE_IPPON, SET_WIN, SET_LOSE, SET_TIE, RESET_OUTCOME } from '../store/mutation-types'
 
 export default {
   data: () => {
@@ -68,8 +80,9 @@ export default {
       KOTE,
       DOU,
       TSUKI,
-      x: 0,
-      y: 0
+      WIN,
+      LOSE,
+      TIE
     }
   },
   computed: {
@@ -85,12 +98,21 @@ export default {
     removeIppon (data) {
       this.$store.commit(REMOVE_IPPON, data)
     },
-    changeXY (x, y) {
-      this.x = x
-      this.y = y
+    setWin (data) {
+      this.$store.commit(SET_WIN, data)
+    },
+    setLose (data) {
+      this.$store.commit(SET_LOSE, data)
+    },
+    setTie (data) {
+      this.$store.commit(SET_TIE, data)
+    },
+    resetOutcome (data) {
+      this.$store.commit(RESET_OUTCOME, data)
     }
   }
 }
+
 /*
 console.log(simulateRoundRobinKendoMatches(8))
 
@@ -235,7 +257,19 @@ function simulateRoundRobinKendoMatches (playerCount) {
 .fill {
   height: 100%;
   width: 100%;
+  background-color: #e3e5e8;
+}
+
+.fill-width-only {
+  width: 100%;
+}
+
+.lose {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='4'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='4'/></svg>");
+  background-repeat:no-repeat;
+  background-position:center center;
   background-color: #756d6d;
+  z-index: -100;
 }
 
 .expand {
@@ -287,7 +321,7 @@ function simulateRoundRobinKendoMatches (playerCount) {
 
 .menu-left {
   position: absolute;
-  background-color: white;
+  background-color: #bec2c6;
   z-index: inherit;
   opacity: 0;
   top: 0;
@@ -313,23 +347,31 @@ function simulateRoundRobinKendoMatches (playerCount) {
 
 .wrap .top-right {
   position: absolute;
-  top: -2px;
+  top: -1px;
   /* Moves to to the right corner of image */
-  right: -3px;
+  right: -1px;
   z-index: inherit;
 }
 
 .wrap .top-right-hidden {
   position: absolute;
-  top: -2px;
+  top: -1px;
   /* Moves to to the right corner of image */
-  right: -3px;
+  right: 2px;
   z-index: inherit;
   opacity: 0;
 }
 
 .icon {
   width: 30px;
+}
+
+.medium-icon {
+  width: 45px;
+}
+
+.big-icon {
+  width: 60px;
 }
 
 .super {

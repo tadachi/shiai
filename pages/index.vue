@@ -4,9 +4,9 @@
       shiai
     </h1>
     <h2 class="subtitle dotted">
-      Web kendo tournament bracket generator.
+      Web Kendo tournament bracket generator.
     </h2>
-    <score-card/>
+    <!-- <score-card/> -->
     <round-robin/>
   </div>
 </template>
