@@ -3,7 +3,7 @@
 > Web Kendo tournament bracket generator.
 
 ### Early Pre-alpha screenshot
-![Early screenshot of shiai kendo tournament generator](shiai_pre_alpha_screen.jpg?raw=true)
+![Early screenshot of shiai kendo tournament generator](shiai_pre_alpha_screen.jpg)
 
 ### Build Setup
 
