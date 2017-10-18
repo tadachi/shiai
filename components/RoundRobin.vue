@@ -19,9 +19,11 @@
                 <img class="top-right-hidden super" src="~/static/delete.svg">
                 <img class="medium-icon":src="ippon + '.svg'">
               </div>
+            </div>
+            <div class="fill-width-only">
               <div class="wrap" v-for="(penalty, key) in $store.state.round_robin_card[n][m].penalty" :key="key" v-on:click="removePenalty({x: n, y: m, index: key})">
                 <img class="top-right-hidden super" src="~/static/delete.svg">
-                <img class="medium-icon":src="penalty + '.svg'">
+                <img class="small-icon":src="penalty + '.svg'">
               </div>
             </div>
             <div class="wrap" v-on:click="resetOutcome({x: n, y: m})">
@@ -382,12 +384,16 @@ function simulateRoundRobinKendoMatches (playerCount) {
   width: 30px;
 }
 
+.small-icon {
+  width: 25px;
+}
+
 .medium-icon {
-  width: 45px;
+  width: 60px;
 }
 
 .big-icon {
-  width: 60px;
+  width: 70px;
 }
 
 .super {
