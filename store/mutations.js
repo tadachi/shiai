@@ -21,6 +21,32 @@ export const mutations = {
       }
     }
   },
+  ADD_PENALTY (state, data) {
+    if (state.round_robin_card[data.x][data.y]) {
+      if (state.round_robin_card[data.x][data.y].penalty.length < 4) {
+        state.round_robin_card[data.x][data.y].penalty.push(data.penalty)
+        if (state.round_robin_card[data.x][data.y].penalty.length === 2) {
+          state.score_card[data.y].points += 1
+        }
+        if (state.round_robin_card[data.x][data.y].penalty.length === 4) {
+          state.score_card[data.y].points += 1
+        }
+      }
+    }
+  },
+  REMOVE_PENALTY (state, data) {
+    if (state.round_robin_card[data.x][data.y]) {
+      if (state.round_robin_card[data.x][data.y].penalty.length > 0) {
+        state.round_robin_card[data.x][data.y].penalty.splice(data.index, 1)
+        if (state.round_robin_card[data.x][data.y].penalty.length === 1) {
+          state.score_card[data.y].points -= 1
+        }
+        if (state.round_robin_card[data.x][data.y].penalty.length === 3) {
+          state.score_card[data.y].points -= 1
+        }
+      }
+    }
+  },
   SET_WIN (state, data) {
     if (state.round_robin_card[data.x][data.y]) {
       state.round_robin_card[data.x][data.y].outcome = data.outcome

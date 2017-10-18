@@ -18,7 +18,7 @@ function create2DArray (rows) {
   for (let n = 0; n < rows; n++) {
     arr.push([])
     for (let m = 0; m < rows; m++) {
-      arr[n][m] = {'points': [], 'outcome': ''}
+      arr[n][m] = {'points': [], 'outcome': '', 'penalty': []}
     }
   }
   return arr

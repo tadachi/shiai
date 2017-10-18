@@ -19,6 +19,10 @@
                 <img class="top-right-hidden super" src="~/static/delete.svg">
                 <img class="medium-icon":src="ippon + '.svg'">
               </div>
+              <div class="wrap" v-for="(penalty, key) in $store.state.round_robin_card[n][m].penalty" :key="key" v-on:click="removePenalty({x: n, y: m, index: key})">
+                <img class="top-right-hidden super" src="~/static/delete.svg">
+                <img class="medium-icon":src="penalty + '.svg'">
+              </div>
             </div>
             <div class="wrap" v-on:click="resetOutcome({x: n, y: m})">
               <img class="top-right-hidden super" src="~/static/delete.svg">
@@ -46,6 +50,10 @@
                   <img class="top-right super" src="~/static/add.svg">
                   <img class="icon" src="~/static/tsuki.svg">
                 </div>
+                <div class="wrap menu-item" v-on:click="addPenalty({x: n, y: m, penalty: PENALTY})">
+                  <img class="top-right super" src="~/static/add.svg">
+                  <img class="icon" src="~/static/penalty.svg">
+                </div>
                 <div class="wrap menu-item" v-if="!$store.state.round_robin_card[n][m].outcome" v-on:click="setWin({x: n, y: m, outcome: WIN})">
                   <img class="icon" src="~/static/win.svg">
                 </div>
@@ -70,8 +78,8 @@
 </template>
 
 <script>
-import { MEN, KOTE, DOU, TSUKI, WIN, LOSE, TIE } from '../store/shiai_constants'
-import { ADD_IPPON, REMOVE_IPPON, SET_WIN, SET_LOSE, SET_TIE, RESET_OUTCOME } from '../store/mutation-types'
+import { MEN, KOTE, DOU, TSUKI, WIN, LOSE, TIE, PENALTY } from '../store/shiai_constants'
+import { ADD_IPPON, REMOVE_IPPON, SET_WIN, SET_LOSE, SET_TIE, RESET_OUTCOME, ADD_PENALTY, REMOVE_PENALTY } from '../store/mutation-types'
 
 export default {
   data: () => {
@@ -82,7 +90,8 @@ export default {
       TSUKI,
       WIN,
       LOSE,
-      TIE
+      TIE,
+      PENALTY
     }
   },
   computed: {
@@ -97,6 +106,12 @@ export default {
     },
     removeIppon (data) {
       this.$store.commit(REMOVE_IPPON, data)
+    },
+    addPenalty (data) {
+      this.$store.commit(ADD_PENALTY, data)
+    },
+    removePenalty (data) {
+      this.$store.commit(REMOVE_PENALTY, data)
     },
     setWin (data) {
       this.$store.commit(SET_WIN, data)
@@ -249,9 +264,10 @@ function simulateRoundRobinKendoMatches (playerCount) {
 }
 
 .standard-size {
-  min-width: 125px;
-  max-width: 125px;
-  min-height: 175px;
+  min-width: 175px;
+  max-width: 175px;
+  min-height: 225px;
+  max-height: 550px;
 }
 
 .fill {
