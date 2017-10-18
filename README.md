@@ -1,8 +1,11 @@
 # shiai
 
-> Web kendo tournament bracket generator.
+> Web Kendo tournament bracket generator.
 
-## Build Setup
+### Early Pre-alpha screenshot
+![Early screenshot of shiai kendo tournament generator](shiai_pre_alpha_screen.jpg?raw=true)
+
+### Build Setup
 
 ``` bash
 # install dependencies
