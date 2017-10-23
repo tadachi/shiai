@@ -12,5 +12,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {},
-  globals: {}
+  globals: {
+    "camelcase": [2, {"properties": "never"}]
+  }
 }

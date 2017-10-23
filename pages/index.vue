@@ -1,12 +1,13 @@
 <template>
   <div class="section background-gradient">
-    <h1 class="title dotted">
+    <h1 class="title">
       shiai
     </h1>
-    <h2 class="subtitle dotted">
+    <h2 class="subtitle">
       Web Kendo tournament bracket generator.
     </h2>
     <!-- <score-card/> -->
+    <shiai-form />
     <round-robin/>
   </div>
 </template>
@@ -14,11 +15,13 @@
 <script>
 import ScoreCard from '~/components/ScoreCard.vue'
 import RoundRobin from '~/components/RoundRobin.vue'
+import ShiaiForm from '~/components/ShiaiForm.vue'
 
 export default {
   components: {
     ScoreCard,
-    RoundRobin
+    RoundRobin,
+    ShiaiForm
   }
 }
 </script>

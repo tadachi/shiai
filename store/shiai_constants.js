@@ -9,6 +9,8 @@ export const PENALTY = 'penalty'
 export const WIN = 'win'
 export const LOSE = 'lose'
 export const TIE = 'tie'
+export const ROUNDROBIN = 'Round Robin'
+/* For simulations */
 export const TIEMATCH = 'TieMatch'
 export const ONEPOINTMATCH = 'OnePointMatch'
 export const TWOPOINTMATCH = 'TwoPointMatch'

@@ -1,19 +1,20 @@
 <template>
-  <div class="section background modifier">
-    <div class="columns is-mobile is-size-6 is-centered" v-for="(participant, n) in $store.state.participants" :key="n">
-      <div :class="responsive" class="column dotted standard-size is-paddingless is-centered is-narrow" v-for="(participant, m) in $store.state.participants" :key="m">
+  <div v-if="$store.state.round_robin_card" class="section background modifiers">
+    <!-- <modal v-if="showModal"/> -->
+    <div class="columns is-mobile is-size-6" v-for="(participant, n) in $store.state.participants" :key="n">
+      <div class="column dotted standard-size is-paddingless is-centered is-narrow" v-for="(participant, m) in $store.state.participants" :key="m">
         <div v-if="n <= 0">
           <h1 class="has-text-centered has-text-weight-bold has-text-centered is-size-5 has-text-white">{{participant}}</h1>
         </div>
         <div class="has-text-centered has-text-weight-bold is-size-5 has-text-white" v-else-if="m <= 0">
-          <div>{{$store.state.participants[n]}}</div>
-          <div>{{$store.state.score_card[n].wins}}-{{$store.state.score_card[n].losses}}-{{$store.state.score_card[n].ties}} / {{$store.state.score_card[n].points}}P</div>
+          <div>{{$store.state.participants[n]}} ({{n}})</div>
+          <div>{{$store.state.score_card[n].wins}}W-{{$store.state.score_card[n].losses}}L-{{$store.state.score_card[n].ties}}T / {{$store.state.score_card[n].points}}P</div>
         </div>
         <div class="background-black-fill" v-else-if="m == n">
         </div>
         <div v-else :class="$store.state.round_robin_card[n][m].outcome" class="fill expand dotted has-text-white"> <!-- $store.state...outcome is win or lose. check .win and .lose class for more info -->
           <div class="has-text-centered">
-            <div class="is-size-6 has-text-black">[{{n}}, {{m}}]</div>
+            <div class="is-size-6 has-text-black">({{n}}, {{m}})</div>
             <div class="fill-width-only">
               <div class="wrap" v-for="(ippon, key) in $store.state.round_robin_card[n][m].points" :key="key" v-on:click="removeIppon({x: n, y: m, index: key})">
                 <img class="top-right-hidden super" src="~/static/delete.svg">
@@ -75,13 +76,13 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import { MEN, KOTE, DOU, TSUKI, WIN, LOSE, TIE, PENALTY } from '../store/shiai_constants'
-import { ADD_IPPON, REMOVE_IPPON, SET_WIN, SET_LOSE, SET_TIE, RESET_OUTCOME, ADD_PENALTY, REMOVE_PENALTY } from '../store/mutation-types'
+import { ADD_IPPON, REMOVE_IPPON, SET_WIN, SET_LOSE, SET_TIE, RESET_OUTCOME, ADD_PENALTY, REMOVE_PENALTY } from '../store/mutation_types'
+// import Modal from './Modal.vue'
 
 export default {
   data: () => {
@@ -94,13 +95,13 @@ export default {
       LOSE,
       TIE,
       PENALTY
+      // showModal: true
     }
   },
+  // components: {
+  //   Modal
+  // },
   computed: {
-    responsive: () => {
-      // return 'is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd'
-      // return ''
-    }
   },
   methods: {
     addIppon (data) {

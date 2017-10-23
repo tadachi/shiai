@@ -1,4 +1,5 @@
-import { LOSE, WIN, TIE } from '../store/shiai_constants'
+import { LOSE, WIN, TIE, ROUNDROBIN } from '../store/shiai_constants'
+// import * as _ from 'underscore'
 
 export const mutations = {
   ADD_IPPON (state, data) {
@@ -94,5 +95,34 @@ export const mutations = {
       state.round_robin_card[data.x][data.y].outcome = ''
       state.round_robin_card[data.y][data.x].outcome = ''
     }
+  },
+  SUBMIT_SHIAI (state, data) {
+    if (data.type === ROUNDROBIN) {
+      state.count = data.participants.length
+      state.participants = data.participants
+      state.round_robin_card = create2DArray(state.count + 1)
+      state.score_card = createScoreCardArray(state.count)
+    } else {
+      throw Error
+    }
   }
+}
+
+function create2DArray (rows) {
+  let arr = []
+  for (let n = 0; n < rows; n++) {
+    arr.push([])
+    for (let m = 0; m < rows; m++) {
+      arr[n][m] = {'points': [], 'outcome': '', 'penalty': []}
+    }
+  }
+  return arr
+}
+
+function createScoreCardArray (playerCount) {
+  let arr = []
+  for (let n = 0; n < playerCount; n++) {
+    arr.push({wins: 0, losses: 0, ties: 0, points: 0})
+  }
+  return arr
 }
