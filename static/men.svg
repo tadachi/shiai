@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -10,87 +7,70 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="150.3988mm"
-   height="143.59523mm"
-   viewBox="0 0 150.3988 143.59523"
+   width="150"
+   height="144"
    version="1.1"
+   viewBox="0 0 150.4 143.6"
    id="svg8"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="men.svg">
-  <defs
-     id="defs2">
-    <linearGradient
-       id="linearGradient5976"
-       osb:paint="solid">
-      <stop
-         style="stop-color:#ff0000;stop-opacity:1;"
-         offset="0"
-         id="stop5974" />
-    </linearGradient>
-  </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="-116.77204"
-     inkscape:cy="256.50757"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:window-width="1858"
-     inkscape:window-height="1057"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0">
-    <inkscape:grid
-       type="xygrid"
-       id="grid3709"
-       originx="-28.744049"
-       originy="-69.565471" />
-  </sodipodi:namedview>
+   sodipodi:docname="men.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
   <metadata
-     id="metadata5">
+     id="metadata14">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-28.744049,-83.839302)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:126.48901367px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:3.16222501"
-       x="37.792446"
-       y="211.72705"
-       id="text3701"
-       transform="scale(1.0781475,0.92751689)"><tspan
-         sodipodi:role="line"
-         id="tspan3699"
-         x="37.792446"
-         y="211.72705"
-         style="fill:#ff0000;stroke-width:3.16222501">メ</tspan></text>
-    <ellipse
-       style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:4.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path3703"
-       cx="103.94345"
-       cy="155.63692"
-       rx="72.949402"
-       ry="69.547615" />
-  </g>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1858"
+     inkscape:window-height="1177"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="1.6388889"
+     inkscape:cx="-26.59322"
+     inkscape:cy="72"
+     inkscape:window-x="1974"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <text
+     transform="scale(0.88245,1.1332)"
+     x="46.105652"
+     y="99.996506"
+     font-size="100px"
+     letter-spacing="0px"
+     word-spacing="0px"
+     style="font-size:99.99967597px;line-height:1;font-family:sans-serif;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:3;-inkscape-font-specification:'sans-serif, Bold';font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
+     id="text4">
+    <tspan
+       x="46.105652"
+       y="99.996506"
+       font-size="100px"
+       style="font-size:99.99967597px;font-family:sans-serif;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;fill:#ff0000;stroke-width:3;-inkscape-font-specification:'sans-serif, Bold';font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;"
+       id="tspan2">メ</tspan>
+  </text>
+  <ellipse
+     cx="75.863"
+     cy="73.024"
+     rx="63.105"
+     ry="61.881"
+     fill="none"
+     stroke="#f00"
+     stroke-width="8.6834"
+     id="ellipse6" />
 </svg>

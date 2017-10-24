@@ -383,18 +383,22 @@ function simulateRoundRobinKendoMatches (playerCount) {
 
 .icon {
   width: 30px;
+  height: auto;
 }
 
 .small-icon {
   width: 25px;
+  height: auto;
 }
 
 .medium-icon {
   width: 60px;
+  height: auto;
 }
 
 .big-icon {
   width: 70px;
+  height: auto;
 }
 
 .super {

@@ -18,12 +18,6 @@
     "underscore": "^1.8.3",
     "vuex-persistedstate": "^2.0.0"
   },
-  "config": {
-    "nuxt": {
-      "host": "0.0.0.0",
-      "port": "3333"
-    }
-  },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "cross-env": "^5.1.0",
