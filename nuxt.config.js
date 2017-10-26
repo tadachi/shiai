@@ -8,6 +8,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Web kendo tournament bracket generator.' }
+      { hid: 'keywords', name: 'keywords', content: 'kendo tournament round-robin Round Robin bracket generator 剣道 試合 shiai'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
