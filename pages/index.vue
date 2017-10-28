@@ -8,7 +8,9 @@
     </h2>
     <!-- <score-card/> -->
     <shiai-form />
-    <round-robin/>
+    <round-robin />
+    <team-match />
+    <!-- <tournament /> -->
   </div>
 </template>
 
@@ -16,12 +18,16 @@
 import ScoreCard from '~/components/ScoreCard.vue'
 import RoundRobin from '~/components/RoundRobin.vue'
 import ShiaiForm from '~/components/ShiaiForm.vue'
+import Tournament from '~/components/Tournament.vue'
+import TeamMatch from '~/components/TeamMatch.vue'
 
 export default {
   components: {
     ScoreCard,
     RoundRobin,
-    ShiaiForm
+    ShiaiForm,
+    Tournament,
+    TeamMatch
   }
 }
 </script>

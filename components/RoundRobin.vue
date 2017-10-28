@@ -1,20 +1,20 @@
 <template>
   <div v-if="$store.state.round_robin_card" class="section background modifiers">
     <!-- <modal v-if="showModal"/> -->
-    <div class="columns is-mobile is-size-6" v-for="(participant, n) in $store.state.participants" :key="n">
-      <div class="column dotted standard-size is-paddingless is-centered is-narrow" v-for="(participant, m) in $store.state.participants" :key="m">
-        <div v-if="n <= 0">
-          <h1 class="has-text-centered has-text-weight-bold has-text-centered is-size-5 has-text-white">{{participant}}</h1>
+    <div class="columns is-mobile" v-for="(participant, n) in $store.state.participants" :key="n">
+      <div class="column is-mobile-font-size is-paddingless is-centered is-narrow" v-for="(participant, m) in $store.state.participants" :key="m">
+        <div class="header-size" v-if="n <= 0">
+          <h1 class="has-text-centered has-text-weight-bold has-text-white">{{participant}}</h1>
         </div>
-        <div class="has-text-centered has-text-weight-bold is-size-5 has-text-white" v-else-if="m <= 0">
+        <div class="standard-size has-text-centered has-text-weight-bold has-text-white" v-else-if="m <= 0">
           <div>{{$store.state.participants[n]}} ({{n}})</div>
           <div>{{$store.state.score_card[n].wins}}W-{{$store.state.score_card[n].losses}}L-{{$store.state.score_card[n].ties}}T / {{$store.state.score_card[n].points}}P</div>
         </div>
-        <div class="background-black-fill" v-else-if="m == n">
+        <div class="standard-size background-black-fill" v-else-if="m == n">
         </div>
-        <div v-else :class="$store.state.round_robin_card[n][m].outcome" class="fill expand dotted has-text-white"> <!-- $store.state...outcome is win or lose. check .win and .lose class for more info -->
+        <div v-else :class="$store.state.round_robin_card[n][m].outcome" class="standard-size fill expand has-text-white"> <!-- $store.state...outcome is win or lose. check .win and .lose class for more info -->
           <div class="has-text-centered">
-            <div class="is-size-6 has-text-black">({{n}}, {{m}})</div>
+            <div class="has-text-black">({{n}}, {{m}})</div>
             <div class="fill-width-only">
               <div class="wrap" v-for="(ippon, key) in $store.state.round_robin_card[n][m].points" :key="key" v-on:click="removeIppon({x: n, y: m, index: key})">
                 <img class="top-right-hidden super" src="~/static/delete.svg">
@@ -33,10 +33,10 @@
               <img class="big-icon" v-if="$store.state.round_robin_card[n][m].outcome == 'tie'" :src="$store.state.round_robin_card[n][m].outcome + '.svg'">
             </div>
           </div>
-          <div class="menu-left has-text-black dotted">
+          <div class="menu-left has-text-black rounded-corners">
             <div>
               <div class="has-text-centered">
-                <div class="is-size-6 has-text-black">[{{n}}, {{m}}]</div>
+                <div class="has-text-black">[{{n}}, {{m}}]</div>
                 <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: MEN})">
                   <img class="top-right super" src="~/static/add.svg">
                   <img class="icon" src="~/static/men.svg">
@@ -130,115 +130,6 @@ export default {
     }
   }
 }
-
-/*
-console.log(simulateRoundRobinKendoMatches(8))
-
-function simulateRoundRobinKendoMatches (playerCount) {
-  console.log(WHITE)
-  console.log(RED)
-
-  let scoreCard = []
-
-  for (let i = 0; i < playerCount; i++) {
-    for (let i = 0; i < playerCount; i++) {
-      scoreCard[i] = []
-    }
-  }
-
-  // Simulation
-  for (let n = 0; n < playerCount; n++) {
-    for (let m = 0; m < playerCount; m++) {
-      if (n === m) {
-        scoreCard[n][m] = 'N/A'
-      } else {
-        scoreCard[n][m] = simulate()
-      }
-    }
-  }
-
-  return scoreCard
-
-  function simulate () {
-    let score = {'encho': false, 'tie': false, RED: [], WHITE: [], 'outcome': ''}
-
-    if (onePointMatch()) {
-      if (encho()) { score['encho'] = true } else { score['encho'] = false }
-      score['outcome'] = ONEPOINTMATCH
-      switch (redOrWhiteWon()) {
-        case true:
-          score.RED.push(ippon())
-          break
-        case false:
-          score.WHITE.push(ippon())
-          break
-      }
-      return score
-    } else if (twoPointMatch()) {
-      // if (encho()) { score[ENCHO] = true } else { score[ENCHO] = false }
-      score['outcome'] = TWOPOINTMATCH
-      switch (redOrWhiteWon()) {
-        case true:
-          score.RED.push(ippon())
-          score.RED.push(ippon())
-          break
-        case false:
-          score.WHITE.push(ippon())
-          score.WHITE.push(ippon())
-          break
-      }
-      return score
-    } else if (twoToOnePointMatch()) {
-      score['outcome'] = TWOTOONEMATCH
-      if (encho()) { score['encho'] = true } else { score['encho'] = false }
-      switch (redOrWhiteWon()) {
-        case true:
-          score.RED.push(ippon())
-          score.RED.push(ippon())
-          score.WHITE.push(ippon())
-          break
-        case false:
-          score.WHITE.push(ippon())
-          score.WHITE.push(ippon())
-          score.RED.push(ippon())
-          break
-      }
-      return score
-    } else {
-      score['tie'] = true
-      score['outcome'] = TIEMATCH
-      return score
-    }
-  }
-
-  // 50% chance to win between red or white.
-  function redOrWhiteWon () {
-    return Math.random() <= 0.5
-  }
-
-  // 30% chance for onePointMatch
-  function onePointMatch () {
-    return Math.random() <= 0.3
-  }
-
-  // 15% chance for tie match
-  // function tieMatch () {
-  //   return Math.random() <= 0.15
-  // }
-
-  // Random number between 1 and 4. 1 = Men, 2 = Kote, 3 = Dou, 4 = Tsuki
-  function ippon () {
-    const ippon = Math.floor(Math.random() * 4) + 1
-    switch (ippon) {
-      case 1: return MEN
-      case 2: return KOTE
-      case 3: return DOU
-      case 4: return TSUKI
-    }
-    return 0
-  }
-}
-*/
 </script>
 
 <style scoped>
@@ -266,11 +157,93 @@ function simulateRoundRobinKendoMatches (playerCount) {
   width: 100%;
 }
 
-.standard-size {
-  min-width: 175px;
-  max-width: 175px;
-  min-height: 225px;
-  max-height: 550px;
+.rounded-corners {
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 1024px) {
+  .header-size {
+    min-width: 175px;
+    max-width: 175px;
+    min-height: 50px;
+    max-height: 550px;
+  } 
+
+  .standard-size {
+    min-width: 175px;
+    max-width: 175px;
+    min-height: 225px;
+    max-height: 550px;
+  }
+
+  .icon {
+    width: 30px;
+    height: auto;
+  }
+
+  .small-icon {
+    width: 25px;
+    height: auto;
+  }
+
+  .medium-icon {
+    width: 60px;
+    height: auto;
+  }
+
+  .big-icon {
+    width: 70px;
+    height: auto;
+  }
+
+  .super {
+    width: 11px;
+    height: 11px;
+  }
+
+}
+
+@media screen and (max-width: 1023px) {
+  .header-size {
+    min-width: 60px;
+    max-width: 60px;
+    min-height: 50px;
+    max-height: 550px;
+  } 
+
+  .is-mobile-font-size {
+    font-size: 9px;
+  }
+
+  .standard-size {
+    min-width: 60px;
+    max-width: 60px;
+    min-height: 155px;
+    max-height: 550px;
+  }
+
+  .icon {
+    width: 20px;
+
+  }
+
+  .small-icon {
+    width: 13px;
+  }
+
+  .medium-icon {
+    width: 32px;
+  }
+
+  .big-icon {
+    width: 42px;
+  }
+
+  .super {
+    width: 8px;
+    height: 8px;
+  }
+
 }
 
 .fill {
@@ -379,31 +352,6 @@ function simulateRoundRobinKendoMatches (playerCount) {
   right: 2px;
   z-index: inherit;
   opacity: 0;
-}
-
-.icon {
-  width: 30px;
-  height: auto;
-}
-
-.small-icon {
-  width: 25px;
-  height: auto;
-}
-
-.medium-icon {
-  width: 60px;
-  height: auto;
-}
-
-.big-icon {
-  width: 70px;
-  height: auto;
-}
-
-.super {
-  width: 11px;
-  height: 11px;
 }
 
 .wrap:hover .top-right-hidden {

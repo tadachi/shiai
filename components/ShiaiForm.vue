@@ -58,7 +58,6 @@ export default {
     splitParticipantsByNewLine () {
       this.participants = _.compact(this.participants_string.split('\n'))
       this.participants.splice(0, 0, 'Round Robin')
-      console.log(this.participants)
       return (this.participants) ? this.participants : ''
     }
   }
