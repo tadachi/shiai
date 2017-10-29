@@ -1,5 +1,22 @@
-import { LOSE, WIN, TIE, ROUNDROBIN } from '../store/shiai_constants'
-// import * as _ from 'underscore'
+import { WIN, LOSE, TIE, ROUNDROBIN } from './shiai_constants'
+
+export const ADD_IPPON = 'ADD_IPPON'
+export const REMOVE_IPPON = 'REMOVE_IPPON'
+export const SET_WIN = 'SET_WIN'
+export const SET_LOSE = 'SET_LOSE'
+export const SET_TIE = 'SET_TIE'
+export const RESET_OUTCOME = 'RESET_OUTCOME'
+export const ADD_PENALTY = 'ADD_PENALTY'
+export const REMOVE_PENALTY = 'REMOVE_PENALTY'
+export const SUBMIT_SHIAI = 'SUBMIT_SHIAI'
+
+export const state = () => ({
+  count: 0,
+  participants: null,
+  score_card: null,
+  round_robin_card: null,
+  counter_r: 0
+})
 
 export const mutations = {
   ADD_IPPON (state, data) {
@@ -105,6 +122,9 @@ export const mutations = {
     } else {
       throw Error
     }
+  },
+  INC (state) {
+    state.counter_r++
   }
 }
 

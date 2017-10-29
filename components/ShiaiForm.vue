@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-import { SUBMIT_SHIAI } from '../store/mutation_types'
+import { SUBMIT_SHIAI } from '../store/round_robin'
 import { ROUNDROBIN } from '../store/shiai_constants'
 import * as _ from 'underscore'
 
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     submit (data) {
-      this.$store.commit(SUBMIT_SHIAI, data)
+      this.$store.commit(`round_robin/${SUBMIT_SHIAI}`, data)
     }
   },
   computed: {

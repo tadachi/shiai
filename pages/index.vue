@@ -9,7 +9,7 @@
     <!-- <score-card/> -->
     <shiai-form />
     <round-robin />
-    <team-match />
+    <!-- <team-match /> -->
     <!-- <tournament /> -->
   </div>
 </template>
