@@ -10,6 +10,7 @@ export const WIN = 'win'
 export const LOSE = 'lose'
 export const TIE = 'tie'
 export const ROUNDROBIN = 'Round Robin'
+export const TEAMMATCH = 'Team Match'
 /* For simulations */
 export const TIEMATCH = 'TieMatch'
 export const ONEPOINTMATCH = 'OnePointMatch'

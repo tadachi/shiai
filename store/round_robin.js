@@ -9,13 +9,15 @@ export const RESET_OUTCOME = 'RESET_OUTCOME'
 export const ADD_PENALTY = 'ADD_PENALTY'
 export const REMOVE_PENALTY = 'REMOVE_PENALTY'
 export const SUBMIT_SHIAI = 'SUBMIT_SHIAI'
+export const SHOW = 'SHOW'
+export const HIDE = 'HIDE'
 
 export const state = () => ({
   count: 0,
   participants: null,
   score_card: null,
   round_robin_card: null,
-  counter_r: 0
+  show: false
 })
 
 export const mutations = {
@@ -123,8 +125,11 @@ export const mutations = {
       throw Error
     }
   },
-  INC (state) {
-    state.counter_r++
+  SHOW (state) {
+    state.show = true
+  },
+  HIDE (state) {
+    state.show = false
   }
 }
 

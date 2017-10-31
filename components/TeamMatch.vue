@@ -1,11 +1,11 @@
 <template>
-  <div class="section background modifiers">
+  <div v-if="show" class="section background modifiers">
     <div class="table-container">
       <div class="table-cells-container" v-for="(n, key) in count" :key="key">
-        <div class="player-cell header-size"></div>
+        <div class="player-cell header-size">{{team_red_participants[key]}}</div>
         <div class="points-cell standard-size"></div>
         <div class="points-cell standard-size"></div>
-        <div class="player-cell header-size"></div>
+        <div class="player-cell header-size">{{team_white_participants[key]}}</div>
       </div>
     </div>
   </div>
@@ -15,12 +15,16 @@
 export default {
   data: () => {
     return {
-      count: 5
     }
   },
   methods: {
   },
   computed: {
+    team_match_card () { return this.$store.state.team_match.team_match_card },
+    team_red_participants () { return this.$store.state.team_match.team_red_participants },
+    team_white_participants () { return this.$store.state.team_match.team_white_participants },
+    count () { return this.$store.state.team_match.count },
+    show () { return this.$store.state.team_match.show }
   }
 }
 </script>

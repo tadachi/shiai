@@ -17,6 +17,12 @@ export default {
   methods: {
   },
   computed: {
+    team_match_card () { return this.$store.state.team_match.team_match_card },
+    team_red_participants () { return this.$store.state.team_match.team_red_participants },
+    team_white_participants () { return this.$store.state.team_match.team_white_participants },
+    round_robin_card () { return this.$store.state.round_robin.round_robin_card },
+    participants () { return this.$store.state.round_robin.participants },
+    score_card () { return this.$store.state.round_robin.score_card }
   }
 }
 </script>

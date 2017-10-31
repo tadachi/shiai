@@ -1,5 +1,5 @@
 <template>
-  <div v-if="round_robin_card" class="section background modifiers">
+  <div v-if="show" class="section background modifiers">
     <!-- <modal v-if="showModal"/> -->
     <div class="columns is-mobile" v-for="(participant, n) in participants" :key="n">
       <div class="column is-mobile-font-size is-paddingless is-centered is-narrow" v-for="(participant, m) in participants" :key="m">
@@ -104,7 +104,8 @@ export default {
   computed: {
     round_robin_card () { return this.$store.state.round_robin.round_robin_card },
     participants () { return this.$store.state.round_robin.participants },
-    score_card () { return this.$store.state.round_robin.score_card }
+    score_card () { return this.$store.state.round_robin.score_card },
+    show () { return this.$store.state.round_robin.show }
   },
   methods: {
     addIppon (data) {
@@ -227,19 +228,18 @@ export default {
 
   .icon {
     width: 20px;
-
   }
 
   .small-icon {
-    width: 13px;
+    width: 10px;
   }
 
   .medium-icon {
-    width: 32px;
+    width: 30px;
   }
 
   .big-icon {
-    width: 42px;
+    width: 40px;
   }
 
   .super {
@@ -337,7 +337,8 @@ export default {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  margin: 1px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .wrap .top-right {
