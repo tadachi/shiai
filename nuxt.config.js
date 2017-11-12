@@ -25,6 +25,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    build: {},
     postcss: {
       plugins: {
         'postcss-custom-properties': false
