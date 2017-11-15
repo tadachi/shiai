@@ -14,8 +14,9 @@
   },
   "dependencies": {
     "@nuxtjs/bulma": "^1.0.3",
-    "dragula": "^3.7.2",
+    "node-sass": "^4.6.1",
     "nuxt": "^1.0.0-rc11",
+    "sass-loader": "^6.0.6",
     "underscore": "^1.8.3",
     "vuex-persistedstate": "^2.0.0"
   },

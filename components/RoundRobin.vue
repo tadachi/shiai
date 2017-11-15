@@ -3,19 +3,19 @@
     <div class="points-cell-container" v-for="(participant, n) in participants" :key="n">
       <div v-for="(participant, m) in participants" :key="m">
 
-        <div v-if="n <= 0" class="header-size fill dotted is-mobile-font-size">
+        <div v-if="n <= 0" style="background-color: #cfd2d2" class="header-size fill is-mobile-font-size has-text-centered">
           {{participant}}
         </div>
 
-        <div v-else-if="m <= 0" class="standard-size has-text-centered has-text-weight-bold has-text-white is-mobile-font-size dotted">
+        <div v-else-if="m <= 0" style="background-color: #121f1f" class="standard-size has-text-centered has-text-weight-bold has-text-white is-mobile-font-size">
           <div>{{participants[n]}} ({{n}})</div>
           <div>{{score_card[n].wins}}W-{{score_card[n].losses}}L-{{score_card[n].ties}}T / {{score_card[n].points}}P</div>
         </div>
 
-        <div class="standard-size background-black-fill dotted" v-else-if="m == n"></div>
+        <div class="standard-size background-black-fill" v-else-if="m == n"></div>
           
         <div v-else>
-          <div class="points-cell standard-size dotted" :class="round_robin_card[n][m].outcome" v-on:click="showPointsMenu('(' + m + ',' + n + ')')" >
+          <div class="points-cell standard-size has-text-centered" :class="round_robin_card[n][m].outcome">
             <div class="score-menu">
               <div class="has-text-black">({{n}}, {{m}})</div>
               <div>
@@ -38,7 +38,7 @@
                 </div>
               </div>
             </div>
-            <div class="points-menu standard-menu-size dotted" :ref="'(' + m + ',' + n + ')'">
+            <div class="points-menu standard-menu-size" :ref="'(' + m + ',' + n + ')'">
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: MEN})">
                 <img class="top-left-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/men.svg">
@@ -59,16 +59,15 @@
                 <img class="top-left-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/penalty.svg">
               </div>
+            </div>
+            <div class="points-menu standard-menu-size" :ref="'(' + m + ',' + n + ')'">
               <div class="wrap menu-item" v-if="!round_robin_card[n][m].outcome" v-on:click="setWin({x: n, y: m, outcome: WIN})">
-                <img class="top-left-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/win.svg">
               </div>
               <div class="wrap menu-item" v-if="!round_robin_card[n][m].outcome" v-on:click="setLose({x: n, y: m, outcome: LOSE})">
-                <img class="top-left-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/lose.svg">
               </div>
               <div class="wrap menu-item" v-if="!round_robin_card[n][m].outcome" v-on:click="setTie({x: n, y: m, outcome: TIE})" >
-                <img class="top-left-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/tie.svg">
               </div>
               <div class="wrap menu-item" v-on:click="resetOutcome({x: n, y: m})" >
@@ -138,8 +137,11 @@ export default {
 }
 </script>
 
-<style scoped>
-@media screen and (min-width: 1px) {
+<style lang="scss" scoped>
+$screen-min-width: 1024px;
+$points-back-color: 'grey';
+$player-score-back-color: #121f1f;
+@media screen and (min-width: $screen-min-width) {
   .header-size {
     min-width: 175px;
     max-width: 175px;
@@ -161,29 +163,24 @@ export default {
   }
 
   .points-menu {
-    height: 75px;
-    background-color:grey;
+    height: 35px;
+    background-color: $points-back-color;
     opacity: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .icon {
     width: auto;
     height: auto;
-  }
-
-  .score-icon {
-    width: 25%;
-    height: 25%;
-  }
-
-  .small-icon {
-    width: 10%;
-    height: 10%;
+    margin-top: 7px;
   }
 
   .super {
     width: 25%;
     height: 25%;
+    margin-top: 5px;
   }
 
   .score-item {
@@ -198,7 +195,7 @@ export default {
 
   .outcome-item {
     display: inline-block;
-    width: 20%;
+    width: 30%;
   }
 
   .menu-item {
@@ -209,7 +206,91 @@ export default {
   .wrap .top-left-hidden {
     opacity: 0;
     position: absolute;
+    margin-left: 70%;
+    margin-top: 4%;
     /* Moves to to the right corner of image */
+  }
+
+  .score-item:hover, .penalty-item:hover, .menu-item:hover {
+    opacity: 0.95;
+    transform: scale(1.5);
+    z-index: 9999;
+  }
+
+  .outcome-item:hover {
+    opacity: 0.95;
+    z-index: 9999;
+  }
+}
+
+@media screen and (max-width: 1023px) { 
+  .header-size {
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 50px;
+    max-height: 50px;
+  } 
+
+  .standard-size {
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 225px;
+    max-height: 225px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .score-menu {
+    height: 150px;
+  }
+
+  .points-menu {
+    height: 35px;
+    background-color: $points-back-color;
+    opacity: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .icon {
+    width: auto;
+    height: auto;
+  }
+
+  .super {
+    width: 25%;
+    height: 25%;
+  }
+
+  .score-item {
+    display: inline-block;
+    width: 30%;
+  }
+
+  .penalty-item {
+    display: inline-block;
+    width: 23%;
+  }
+
+  .outcome-item {
+    display: inline-block;
+    width: 40%;
+  }
+
+  .menu-item {
+    display: inline-block;
+    width: 15px;
+  }
+
+  .wrap .top-left-hidden {
+    opacity: 0;
+    position: absolute;
+    /* Moves to to the right corner of image */
+  }
+
+  .score-item:hover, .penalty-item:hover, .outcome-item:hover, .menu-item:hover {
+    opacity: 0.95;
   }
 }
 
@@ -249,11 +330,7 @@ export default {
 }
 
 .points-cell:hover .points-menu {
-  opacity: 1;
-}
-
-.score-item:hover, .penalty-item:hover, .outcome-item:hover, .menu-item:hover {
-  opacity: 0.5;
+  opacity: .95;
 }
 
 .wrap {
