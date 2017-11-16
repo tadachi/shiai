@@ -4,7 +4,7 @@
       <div class="table-cells-container" v-for="(n, key) in (count/2)" :key="key">
         <div class="player-cell dotted header-size">{{team_red_participants[key]}} {{key}}</div>
         <div class="points-cell dotted standard-size" v-for="(n, k) in 2" :key="k">
-          <div else class="menu-right dotted">
+          <div else class="points-menu dotted">
             <div class="wrap menu-item">
               <img class="top-right super" src="~/static/add.svg">
               <img class="icon" src="~/static/men.svg">
@@ -109,36 +109,22 @@ export default {
   background-color: black;
 }
 
-.menu-right {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  position: relative;
-  background-color: grey;
-  z-index: 9999;
-  opacity: 0;
-  left: 100%;
-  width: 50%;
+.points-menu {
+  width: inherit;
+  height: 100px;
+  background-color: blue;
 }
 
 .points-cell:hover {
   background-color: grey;
 }
 
-.points-cell:hover .menu-right {
+.points-cell:hover .points-menu {
   opacity: 1;
 }
 
 .points-cell:hover .menu-left {
   opacity: 1;
-}
-
-.menu-item {
-  display: flex;
-  width: 50%;
-  height: 50px;
-  /* border-style: solid; */
-  border: 1px red solid;
 }
 
 .wrap {
@@ -184,46 +170,21 @@ export default {
     max-height: 550px;
   }
 
-  .icon {
-    width: auto;
-    height: auto;
-  }
-
-  .super {
-    width: 25%;
-    height: 25%;
-  }
-
-}
-
-@media screen and (max-width: 1023px) {
-  .header-size {
-    min-width: 60px;
-    max-width: 60px;
-    min-height: 50px;
-    max-height: 550px;
-  } 
-
-  .is-mobile-font-size {
-    font-size: 9px;
-  }
-
-  .standard-size {
-    min-width: 60px;
-    max-width: 60px;
-    min-height: 155px;
-    max-height: 550px;
+  .menu-item {
+    display: inline-block;
+    /* border-style: solid; */
+    border: 1px red solid;
   }
 
   .icon {
-    width: auto;
-    height: auto;
+    width: 20px;
+    height: 20px;
   }
 
   .super {
-    width: 25%;
-    height: 25%;
+    width: 7px;
+    height: 7px;
   }
-}
 
+}
 </style>

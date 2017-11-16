@@ -3,36 +3,36 @@
     <div class="points-cell-container" v-for="(participant, n) in participants" :key="n">
       <div v-for="(participant, m) in participants" :key="m">
 
-        <div v-if="n <= 0" style="background-color: #cfd2d2" class="header-size fill is-mobile-font-size has-text-centered">
+        <div v-if="n <= 0" style="background-color: #cfd2d2" class="header-size fill is-mobile-font-size has-text-centered border-black">
           {{participant}}
         </div>
 
-        <div v-else-if="m <= 0" style="background-color: #121f1f" class="standard-size has-text-centered has-text-weight-bold has-text-white is-mobile-font-size">
+        <div v-else-if="m <= 0" style="background-color: #121f1f" class="standard-size has-text-centered has-text-weight-bold has-text-white is-mobile-font-size border-black">
           <div>{{participants[n]}} ({{n}})</div>
           <div>{{score_card[n].wins}}W-{{score_card[n].losses}}L-{{score_card[n].ties}}T / {{score_card[n].points}}P</div>
         </div>
 
-        <div class="standard-size background-black-fill" v-else-if="m == n"></div>
+        <div class="standard-size background-black-fill border-black" v-else-if="m == n"></div>
           
         <div v-else>
-          <div class="points-cell standard-size has-text-centered" :class="round_robin_card[n][m].outcome">
+          <div class="points-cell standard-size has-text-centered border-black" :class="round_robin_card[n][m].outcome">
             <div class="score-menu">
               <div class="has-text-black">({{n}}, {{m}})</div>
               <div>
                 <div class="wrap score-item" v-for="(ippon, key) in round_robin_card[n][m].points" :key="key" v-on:click="removeIppon({x: n, y: m, index: key})">
-                  <img class="top-left-hidden super" src="~/static/delete.svg">
+                  <img class="top-right-hidden super" src="~/static/delete.svg">
                   <img class="" :src="ippon + '.svg'">
                 </div>
               </div>
               <div>
                 <div class="wrap penalty-item" v-for="(penalty, key) in round_robin_card[n][m].penalty" :key="key" v-on:click="removePenalty({x: n, y: m, index: key})">
-                  <img class="top-left-hidden super" src="~/static/delete.svg">
+                  <img class="top-right-hidden-penalty super" src="~/static/delete.svg">
                   <img class="":src="penalty + '.svg'">
                 </div>
               </div>
               <div>
                 <div class="wrap outcome-item" v-on:click="resetOutcome({x: n, y: m})">
-                  <img class="top-left-hidden super" src="~/static/delete.svg">
+                  <img class="top-right-hidden super" src="~/static/delete.svg">
                   <img class="" v-if="round_robin_card[n][m].outcome == 'win'" :src="round_robin_card[n][m].outcome + '.svg'">
                   <img class="" v-if="round_robin_card[n][m].outcome == 'tie'" :src="round_robin_card[n][m].outcome + '.svg'">
                 </div>
@@ -40,23 +40,23 @@
             </div>
             <div class="points-menu standard-menu-size" :ref="'(' + m + ',' + n + ')'">
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: MEN})">
-                <img class="top-left-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/men.svg">
               </div>
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: KOTE})">
-                <img class="top-left-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/kote.svg">
               </div>
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: DOU})">
-                <img class="top-left-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/dou.svg">
               </div>
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: TSUKI})">
-                <img class="top-left-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/tsuki.svg">
               </div>
               <div class="wrap menu-item" v-on:click="addPenalty({x: n, y: m, penalty: PENALTY})">
-                <img class="top-left-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/penalty.svg">
               </div>
             </div>
@@ -203,7 +203,15 @@ $player-score-back-color: #121f1f;
     width: 20px;
   }
 
-  .wrap .top-left-hidden {
+  .wrap .top-right-hidden {
+    opacity: 0;
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 4%;
+    /* Moves to to the right corner of image */
+  }
+
+  .wrap .top-right-hidden-penalty {
     opacity: 0;
     position: absolute;
     margin-left: 70%;
@@ -283,7 +291,7 @@ $player-score-back-color: #121f1f;
     width: 15px;
   }
 
-  .wrap .top-left-hidden {
+  .wrap .top-right-hidden {
     opacity: 0;
     position: absolute;
     /* Moves to to the right corner of image */
@@ -292,29 +300,6 @@ $player-score-back-color: #121f1f;
   .score-item:hover, .penalty-item:hover, .outcome-item:hover, .menu-item:hover {
     opacity: 0.95;
   }
-}
-
-.background {
-  background-color: #161616;
-}
-
-.background-black-fill {
-  background-color: black;
-  width: 100%;
-  height: 100%;
-}
-
-.modifiers {
-  overflow-x: auto;
-}
-
-.points-cell-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.dotted {
-  border-style: dotted;
 }
 
 .points-cell {
@@ -340,14 +325,22 @@ $player-score-back-color: #121f1f;
   padding: 0px;
 }
 
-.wrap:hover .top-left-hidden {
+.wrap:hover .top-right-hidden .top-right-hidden-penalty {
   opacity: 1;
 }
 
-.fill {
-  height: 100%;
-  width: 100%;
-  background-color: #e3e5e8;
+/* Utility CSS */
+.modifiers {
+  overflow-x: auto;
+}
+
+.points-cell-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.dotted {
+  border-style: dotted;
 }
 
 .fill-width-only {
@@ -361,4 +354,31 @@ $player-score-back-color: #121f1f;
   background-color: #756d6d;
   z-index: -100;
 }
+
+.border-black {
+  border: 1px solid black;
+}
+
+.fill {
+  height: 100%;
+  width: 100%;
+  background-color: #e3e5e8;
+}
+
+.background {
+  background-color: #161616;
+}
+
+.background-black-fill {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin fill($color) {
+  height: 100%;
+  width: 100%;
+  background-color: $color;
+}
+
 </style>
