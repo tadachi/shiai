@@ -1,41 +1,46 @@
 <template>
   <div v-if="show" class="section background modifiers">
     <div class="table-container">
+
       <div class="table-cells-container" v-for="(n, key) in (count/2)" :key="key">
         <div class="player-cell dotted header-size">{{team_red_participants[key]}} {{key}}</div>
         <div class="points-cell dotted standard-size" v-for="(n, k) in 2" :key="k">
-          <div else class="points-menu dotted">
-            <div class="wrap menu-item">
-              <img class="top-right super" src="~/static/add.svg">
-              <img class="icon" src="~/static/men.svg">
+          <div else class="points-cell standard-size has-text-centered border-black">
+            <div class="score-menu">
             </div>
-            <div class="wrap menu-item">
-              <img class="top-right super" src="~/static/add.svg">
-              <img class="icon" src="~/static/kote.svg">
-            </div>
-            <div class="wrap menu-item">
-              <img class="top-right super" src="~/static/add.svg">
-              <img class="icon" src="~/static/dou.svg">
-            </div>
-            <div class="wrap menu-item">
-              <img class="top-right super" src="~/static/add.svg">
-              <img class="icon" src="~/static/tsuki.svg">
-            </div>
-            <div class="wrap menu-item">
-              <img class="top-right super" src="~/static/add.svg">
-              <img class="icon" src="~/static/penalty.svg">
-            </div>
-            <div class="wrap menu-item">
-              <img class="icon" src="~/static/win.svg">
-            </div>
-            <div class="wrap menu-item">
-              <img class="icon" src="~/static/lose.svg">
-            </div>
-            <div class="wrap menu-item">
-              <img class="icon" src="~/static/tie.svg">
-            </div>
-            <div class="wrap menu-item">
-              <img class="icon" src="~/static/clear.svg">
+            <div class="points-menu dotted">
+              <div class="wrap menu-item">
+                <img class="top-right super" src="~/static/add.svg">
+                <img class="icon" src="~/static/men.svg">
+              </div>
+              <div class="wrap menu-item">
+                <img class="top-right super" src="~/static/add.svg">
+                <img class="icon" src="~/static/kote.svg">
+              </div>
+              <div class="wrap menu-item">
+                <img class="top-right super" src="~/static/add.svg">
+                <img class="icon" src="~/static/dou.svg">
+              </div>
+              <div class="wrap menu-item">
+                <img class="top-right super" src="~/static/add.svg">
+                <img class="icon" src="~/static/tsuki.svg">
+              </div>
+              <div class="wrap menu-item">
+                <img class="top-right super" src="~/static/add.svg">
+                <img class="icon" src="~/static/penalty.svg">
+              </div>
+              <div class="wrap menu-item">
+                <img class="icon" src="~/static/win.svg">
+              </div>
+              <div class="wrap menu-item">
+                <img class="icon" src="~/static/lose.svg">
+              </div>
+              <div class="wrap menu-item">
+                <img class="icon" src="~/static/tie.svg">
+              </div>
+              <div class="wrap menu-item">
+                <img class="icon" src="~/static/clear.svg">
+              </div>
             </div>
           </div>
         </div>
@@ -47,12 +52,22 @@
 </template>
 
 <script>
+import { MEN, KOTE, DOU, TSUKI, WIN, LOSE, TIE, PENALTY } from '../store/shiai_constants'
+import { ADD_IPPON, REMOVE_IPPON, SET_WIN, SET_LOSE, SET_TIE, RESET_OUTCOME, ADD_PENALTY, REMOVE_PENALTY } from '../store/round_robin'
+
 export default {
   data: () => {
     return {
+      MEN,
+      KOTE,
+      DOU,
+      TSUKI,
+      WIN,
+      LOSE,
+      TIE,
+      PENALTY
+      // showModal: true
     }
-  },
-  methods: {
   },
   computed: {
     team_match_card () { return this.$store.state.team_match.team_match_card },
@@ -60,11 +75,42 @@ export default {
     team_white_participants () { return this.$store.state.team_match.team_white_participants },
     count () { return this.$store.state.team_match.count },
     show () { return this.$store.state.team_match.show }
+  },
+  methods: {
+    addIppon (data) {
+      this.$store.commit(`round_robin/${ADD_IPPON}`, data)
+    },
+    removeIppon (data) {
+      this.$store.commit(`round_robin/${REMOVE_IPPON}`, data)
+    },
+    addPenalty (data) {
+      this.$store.commit(`round_robin/${ADD_PENALTY}`, data)
+    },
+    removePenalty (data) {
+      this.$store.commit(`round_robin/${REMOVE_PENALTY}`, data)
+    },
+    setWin (data) {
+      this.$store.commit(`round_robin/${SET_WIN}`, data)
+    },
+    setLose (data) {
+      this.$store.commit(`round_robin/${SET_LOSE}`, data)
+    },
+    setTie (data) {
+      this.$store.commit(`round_robin/${SET_TIE}`, data)
+    },
+    resetOutcome (data) {
+      this.$store.commit(`round_robin/${RESET_OUTCOME}`, data)
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+$screen-min-width: 1024px;
+$points-back-color: 'grey';
+$player-score-back-color: #121f1f;
+
 .danger {
   color: red;
   font-size: 50px;
@@ -101,7 +147,14 @@ export default {
 
 .points-cell {
   display: flex;
+  flex-direction: column;
   background-color: #e3e5e8;
+  margin: 0;
+  padding: 0;
+}
+
+.border-black {
+  border: 1px solid black;
 }
 
 .empty-cell {
@@ -168,6 +221,10 @@ export default {
     max-width: 175px;
     min-height: 225px;
     max-height: 550px;
+  }
+
+  .score-menu {
+    height: 150px;
   }
 
   .menu-item {

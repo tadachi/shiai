@@ -40,23 +40,23 @@
             </div>
             <div class="points-menu standard-menu-size" :ref="'(' + m + ',' + n + ')'">
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: MEN})">
-                <img class="top-right-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden-ippon super" src="~/static/add.svg">
                 <img class="icon" src="~/static/men.svg">
               </div>
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: KOTE})">
-                <img class="top-right-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden-ippon super" src="~/static/add.svg">
                 <img class="icon" src="~/static/kote.svg">
               </div>
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: DOU})">
-                <img class="top-right-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden-ippon super" src="~/static/add.svg">
                 <img class="icon" src="~/static/dou.svg">
               </div>
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: TSUKI})">
-                <img class="top-right-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden-ippon super" src="~/static/add.svg">
                 <img class="icon" src="~/static/tsuki.svg">
               </div>
               <div class="wrap menu-item" v-on:click="addPenalty({x: n, y: m, penalty: PENALTY})">
-                <img class="top-right-hidden super" src="~/static/add.svg">
+                <img class="top-right-hidden-ippon super" src="~/static/add.svg">
                 <img class="icon" src="~/static/penalty.svg">
               </div>
             </div>
@@ -138,32 +138,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+/* Scoped Globals */
 $screen-min-width: 1024px;
 $points-back-color: 'grey';
 $player-score-back-color: #121f1f;
+
+$standard-width-desktop: 175px;
+$standard-height-desktop: 225px;
 @media screen and (min-width: $screen-min-width) {
   .header-size {
-    min-width: 175px;
-    max-width: 175px;
+    min-width: $standard-width-desktop;
+    max-width: $standard-width-desktop;
     min-height: 50px;
     max-height: 50px;
   } 
 
   .standard-size {
-    min-width: 175px;
-    max-width: 175px;
-    min-height: 225px;
-    max-height: 225px;
+    min-width: $standard-width-desktop;
+    max-width: $standard-width-desktop;
+    min-height: $standard-height-desktop;
+    max-height: $standard-height-desktop;
     margin: 0;
     padding: 0;
   }
 
   .score-menu {
-    height: 150px;
+    height: $standard-height-desktop * 3/4;
   }
 
   .points-menu {
-    height: 35px;
+    height: $standard-height-desktop * 1/4;
     background-color: $points-back-color;
     opacity: 0;
     display: flex;
@@ -210,6 +215,14 @@ $player-score-back-color: #121f1f;
     margin-top: 4%;
     /* Moves to to the right corner of image */
   }
+  
+  .wrap .top-right-hidden-ippon {
+    opacity: 0;
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 20%;
+    /* Moves to to the right corner of image */
+  }
 
   .wrap .top-right-hidden-penalty {
     opacity: 0;
@@ -231,29 +244,31 @@ $player-score-back-color: #121f1f;
   }
 }
 
+$standard-width-mobile: 100px;
+$standard-height-mobile: 225px;
 @media screen and (max-width: 1023px) { 
   .header-size {
-    min-width: 100px;
-    max-width: 100px;
+    min-width: $standard-width-mobile;
+    max-width: $standard-width-mobile;
     min-height: 50px;
     max-height: 50px;
   } 
 
   .standard-size {
-    min-width: 100px;
+    min-width: $standard-width-mobile;
     max-width: 100px;
-    min-height: 225px;
-    max-height: 225px;
+    min-height: $standard-height-mobile;
+    max-height: $standard-height-mobile;
     margin: 0;
     padding: 0;
   }
 
   .score-menu {
-    height: 150px;
+    height: $standard-height-mobile * 3/4;
   }
 
   .points-menu {
-    height: 35px;
+    height: $standard-height-mobile * 1/4;
     background-color: $points-back-color;
     opacity: 0;
     display: flex;
@@ -262,13 +277,14 @@ $player-score-back-color: #121f1f;
   }
 
   .icon {
-    width: auto;
-    height: auto;
+    width: 30px;
+    height: 30px;
   }
 
   .super {
-    width: 25%;
-    height: 25%;
+    width: 5px;
+    height: 5px;
+    opacity: 0;
   }
 
   .score-item {
@@ -278,7 +294,8 @@ $player-score-back-color: #121f1f;
 
   .penalty-item {
     display: inline-block;
-    width: 23%;
+    width: 15px;
+    margin-left: 2px;
   }
 
   .outcome-item {
@@ -294,6 +311,24 @@ $player-score-back-color: #121f1f;
   .wrap .top-right-hidden {
     opacity: 0;
     position: absolute;
+    margin-left: 70%;
+    margin-top: 4%;
+    /* Moves to to the right corner of image */
+  }
+
+  .wrap .top-right-hidden-ippon {
+    opacity: 0;
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 20%;
+    /* Moves to to the right corner of image */
+  }
+
+  .wrap .top-right-hidden-penalty {
+    opacity: 0;
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 4%;
     /* Moves to to the right corner of image */
   }
 
@@ -325,9 +360,22 @@ $player-score-back-color: #121f1f;
   padding: 0px;
 }
 
-.wrap:hover .top-right-hidden .top-right-hidden-penalty {
+.wrap:hover .top-right-hidden {
   opacity: 1;
 }
+
+.wrap:hover .top-right-hidden-ippon {
+  opacity: 1;
+}
+
+.wrap:hover .top-right-hidden-penalty {
+  opacity: 1;
+}
+
+.wrap:hover .top-right-hidden-menu {
+  opacity: 1;
+}
+
 
 /* Utility CSS */
 .modifiers {
