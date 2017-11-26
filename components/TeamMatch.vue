@@ -3,12 +3,12 @@
     <div class="table-container">
 
       <div class="table-cells-container" v-for="(n, key) in (count/2)" :key="key">
-        <div class="player-cell dotted header-size">{{team_red_participants[key]}} {{key}}</div>
-        <div class="points-cell dotted standard-size" v-for="(n, k) in 2" :key="k">
+        <div style="background-color: #cfd2d2" class="player-cell border-black header-size">{{team_red_participants[key]}} {{key}}</div>
+        <div class="points-cell border-black standard-size" v-for="(n, k) in 2" :key="k">
           <div else class="points-cell standard-size has-text-centered border-black">
             <div class="score-menu">
             </div>
-            <div class="points-menu dotted">
+            <div class="points-menu">
               <div class="wrap menu-item">
                 <img class="top-right super" src="~/static/add.svg">
                 <img class="icon" src="~/static/men.svg">
@@ -44,7 +44,7 @@
             </div>
           </div>
         </div>
-        <div class="player-cell dotted header-size">{{team_white_participants[key]}}</div>
+        <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_white_participants[key]}}</div>
       </div>
     </div>
 
@@ -120,6 +120,10 @@ $player-score-back-color: #121f1f;
   border-style: dotted;
 }
 
+.border-black {
+  border: 1px solid black;
+}
+
 .background {
   background-color: #161616;;
 }
@@ -141,7 +145,6 @@ $player-score-back-color: #121f1f;
 }
 
 .player-cell {
-  display: flex;
   background-color: grey;
 }
 
@@ -165,7 +168,7 @@ $player-score-back-color: #121f1f;
 .points-menu {
   width: inherit;
   height: 100px;
-  background-color: blue;
+  background-color: $points-back-color;
 }
 
 .points-cell:hover {
