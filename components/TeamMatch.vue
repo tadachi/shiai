@@ -3,30 +3,30 @@
     <div class="table-container">
 
       <div class="table-cells-container" v-for="(n, key) in (count/2)" :key="key">
-        <div style="background-color: #cfd2d2" class="player-cell border-black header-size">{{team_red_participants[key]}} {{key}}</div>
+        <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_red_participants[key]}} {{key}}</div>
         <div class="points-cell border-black standard-size" v-for="(n, k) in 2" :key="k">
           <div else class="points-cell standard-size has-text-centered border-black">
             <div class="score-menu">
             </div>
             <div class="points-menu">
               <div class="wrap menu-item">
-                <img class="top-right super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/men.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="top-right super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/kote.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="top-right super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/dou.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="top-right super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/tsuki.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="top-right super" src="~/static/add.svg">
+                <img class="top-right-hidden super" src="~/static/add.svg">
                 <img class="icon" src="~/static/penalty.svg">
               </div>
               <div class="wrap menu-item">
@@ -111,66 +111,6 @@ $screen-min-width: 1024px;
 $points-back-color: 'grey';
 $player-score-back-color: #121f1f;
 
-.danger {
-  color: red;
-  font-size: 50px;
-}
-
-.dotted {
-  border-style: dotted;
-}
-
-.border-black {
-  border: 1px solid black;
-}
-
-.background {
-  background-color: #161616;;
-}
-
-.background-black-fill {
-  background-color: black;
-  width: 100%;
-  height: 100%;
-}
-
-.table-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.table-cells-container {
-  display: flex;
-  flex-direction: column
-}
-
-.player-cell {
-  background-color: grey;
-}
-
-.points-cell {
-  display: flex;
-  flex-direction: column;
-  background-color: #e3e5e8;
-  margin: 0;
-  padding: 0;
-}
-
-.border-black {
-  border: 1px solid black;
-}
-
-.empty-cell {
-  display: flex;
-  background-color: black;
-}
-
-.points-menu {
-  width: inherit;
-  height: 100px;
-  background-color: $points-back-color;
-}
-
 .points-cell:hover {
   background-color: grey;
 }
@@ -188,14 +128,6 @@ $player-score-back-color: #121f1f;
   cursor: pointer;
   margin: 0px;
   padding: 0px;
-}
-
-.wrap .top-right {
-  position: absolute;
-  /* Moves to to the right corner of image */
-  left: 70%;
-  top: 3%;
-  z-index: inherit;
 }
 
 .wrap .top-right-hidden {
@@ -231,7 +163,6 @@ $player-score-back-color: #121f1f;
   }
 
   .menu-item {
-    display: inline-block;
     /* border-style: solid; */
     border: 1px red solid;
   }
@@ -245,6 +176,58 @@ $player-score-back-color: #121f1f;
     width: 7px;
     height: 7px;
   }
+}
 
+/* Unchanged */
+.dotted {
+  border-style: dotted;
+}
+
+.border-black {
+  border: 1px solid black;
+}
+
+.background {
+  background-color: #161616;
+}
+
+.background-black-fill {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.table-cells-container {
+  display: flex;
+  flex-direction: column
+}
+
+.player-cell {
+  background-color: grey;
+}
+
+.points-cell {
+  display: flex;
+  flex-direction: column;
+  background-color: #e3e5e8;
+  margin: 0;
+  padding: 0;
+}
+
+.empty-cell {
+  display: flex;
+  background-color: black;
+}
+
+.points-menu {
+  display: flex;
+  width: inherit;
+  height: 100px;
+  background-color: $points-back-color;
 }
 </style>
