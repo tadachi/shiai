@@ -1,7 +1,6 @@
 <template>
   <div v-if="show" class="section background modifiers">
     <div class="table-container">
-
       <div class="table-cells-container" v-for="(n, key) in (count/2)" :key="key">
         <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_red_participants[key]}} {{key}}</div>
         <div class="points-cell border-black standard-size" v-for="(n, k) in 2" :key="k">
@@ -10,36 +9,38 @@
             </div>
             <div class="points-menu">
               <div class="wrap menu-item">
-                <img class="top-right-hidden super" src="~/static/add.svg">
-                <img class="icon" src="~/static/men.svg">
+                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+                <img class="icon-small" src="~/static/men.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="top-right-hidden super" src="~/static/add.svg">
-                <img class="icon" src="~/static/kote.svg">
+                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+                <img class="icon-small" src="~/static/kote.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="top-right-hidden super" src="~/static/add.svg">
-                <img class="icon" src="~/static/dou.svg">
+                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+                <img class="icon-small" src="~/static/dou.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="top-right-hidden super" src="~/static/add.svg">
-                <img class="icon" src="~/static/tsuki.svg">
+                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+                <img class="icon-small" src="~/static/tsuki.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="top-right-hidden super" src="~/static/add.svg">
-                <img class="icon" src="~/static/penalty.svg">
+                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+                <img class="icon-small" src="~/static/penalty.svg">
+              </div>
+            </div>
+            <div class="points-menu">
+              <div class="wrap menu-item">
+                <img class="icon-small" src="~/static/win.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="icon" src="~/static/win.svg">
+                <img class="icon-small" src="~/static/lose.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="icon" src="~/static/lose.svg">
+                <img class="icon-small" src="~/static/tie.svg">
               </div>
               <div class="wrap menu-item">
-                <img class="icon" src="~/static/tie.svg">
-              </div>
-              <div class="wrap menu-item">
-                <img class="icon" src="~/static/clear.svg">
+                <img class="icon-small" src="~/static/clear.svg">
               </div>
             </div>
           </div>
@@ -107,20 +108,16 @@ export default {
 
 <style lang="scss" scoped>
 
+/* Scoped Globals */
 $screen-min-width: 1024px;
 $points-back-color: 'grey';
 $player-score-back-color: #121f1f;
 
+$standard-width-desktop: 175px;
+$standard-height-desktop: 225px;
+
 .points-cell:hover {
   background-color: grey;
-}
-
-.points-cell:hover .points-menu {
-  opacity: 1;
-}
-
-.points-cell:hover .menu-left {
-  opacity: 1;
 }
 
 .wrap {
@@ -128,57 +125,66 @@ $player-score-back-color: #121f1f;
   cursor: pointer;
   margin: 0px;
   padding: 0px;
+
+  .top-right-hidden-small {
+    position: absolute;
+    /* Moves to to the right corner of image */
+    left: 13px;
+    top: 0px;
+    z-index: inherit;
+    opacity: 0;
+  }
+  &:hover .top-right-hidden-small {
+    opacity: 1;
+  }
 }
 
-.wrap .top-right-hidden {
-  position: absolute;
-  /* Moves to to the right corner of image */
-  left: 70%;
-  top: 3%;
-  z-index: inherit;
-  opacity: 0;
-}
-
-.wrap:hover .top-right-hidden {
-  opacity: 1;
-}
-
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: $screen-min-width) {
   .header-size {
-    min-width: 175px;
-    max-width: 175px;
+    min-width: $standard-width-desktop;
+    max-width: $standard-width-desktop;
     min-height: 50px;
-    max-height: 550px;
+    max-height: 50px;
   } 
 
   .standard-size {
-    min-width: 175px;
-    max-width: 175px;
-    min-height: 225px;
-    max-height: 550px;
+    min-width: $standard-width-desktop;
+    max-width: $standard-width-desktop;
+    min-height: $standard-height-desktop;
+    max-height: $standard-height-desktop;
+    margin: 0;
+    padding: 0;
   }
 
   .score-menu {
-    height: 150px;
+    height: $standard-height-desktop * 3/4;
+  }
+
+  .points-menu {
+    height: $standard-height-desktop * 1/4;
+    background-color: $points-back-color;
+    opacity: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .menu-item {
-    /* border-style: solid; */
-    border: 1px red solid;
+    border-style: 1px solid red;
   }
 
-  .icon {
+  .icon-small {
     width: 20px;
     height: 20px;
   }
 
-  .super {
+  .super-small {
     width: 7px;
     height: 7px;
   }
 }
 
-/* Unchanged */
+/* Code frozen */
 .dotted {
   border-style: dotted;
 }
@@ -217,17 +223,9 @@ $player-score-back-color: #121f1f;
   background-color: #e3e5e8;
   margin: 0;
   padding: 0;
-}
 
-.empty-cell {
-  display: flex;
-  background-color: black;
-}
-
-.points-menu {
-  display: flex;
-  width: inherit;
-  height: 100px;
-  background-color: $points-back-color;
+  &:hover .points-menu {
+    opacity: .95;
+  }
 }
 </style>

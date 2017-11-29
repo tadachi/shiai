@@ -6,7 +6,7 @@
     <h2 class="subtitle">
       Web Kendo tournament bracket generator.
     </h2>
-    <score-card/>
+    <!-- <score-card/> -->
     <shiai-form />
     <round-robin />
     <team-match />

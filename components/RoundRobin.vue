@@ -38,7 +38,7 @@
                 </div>
               </div>
             </div>
-            <div class="points-menu standard-menu-size" :ref="'(' + m + ',' + n + ')'">
+            <div class="points-menu" :ref="'(' + m + ',' + n + ')'">
               <div class="wrap menu-item" v-on:click="addIppon({x: n, y: m, ippon: MEN})">
                 <img class="top-right-hidden-ippon super" src="~/static/add.svg">
                 <img class="icon" src="~/static/men.svg">
@@ -60,7 +60,7 @@
                 <img class="icon" src="~/static/penalty.svg">
               </div>
             </div>
-            <div class="points-menu standard-menu-size" :ref="'(' + m + ',' + n + ')'">
+            <div class="points-menu" :ref="'(' + m + ',' + n + ')'">
               <div class="wrap menu-item" v-if="!round_robin_card[n][m].outcome" v-on:click="setWin({x: n, y: m, outcome: WIN})">
                 <img class="icon" src="~/static/win.svg">
               </div>
@@ -140,12 +140,13 @@ export default {
 <style lang="scss" scoped>
 
 /* Scoped Globals */
-$screen-min-width: 1024px;
 $points-back-color: 'grey';
 $player-score-back-color: #121f1f;
 
+$screen-min-width: 1024px;
 $standard-width-desktop: 175px;
 $standard-height-desktop: 225px;
+
 @media screen and (min-width: $screen-min-width) {
   .header-size {
     min-width: $standard-width-desktop;
