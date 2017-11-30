@@ -8,7 +8,7 @@
             <div class="score-menu">
             </div>
             <div class="points-menu">
-              <div class="wrap menu-item">
+              <div class="wrap menu-item"  v-on:click="addIppon({team: RED, player: k, ippon: MEN})">
                 <img class="top-right-hidden-small super-small" src="~/static/add.svg">
                 <img class="icon-small" src="~/static/men.svg">
               </div>
@@ -45,7 +45,7 @@
             </div>
           </div>
         </div>
-        <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_white_participants[key]}}</div>
+        <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_white_participants[key]}} {{key}}</div>
       </div>
     </div>
 
@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import { MEN, KOTE, DOU, TSUKI, WIN, LOSE, TIE, PENALTY } from '../store/shiai_constants'
-import { ADD_IPPON, REMOVE_IPPON, SET_WIN, SET_LOSE, SET_TIE, RESET_OUTCOME, ADD_PENALTY, REMOVE_PENALTY } from '../store/round_robin'
+import { MEN, KOTE, DOU, TSUKI, WIN, LOSE, TIE, PENALTY, RED, WHITE } from '../store/shiai_constants'
+import { ADD_IPPON } from '../store/team_match'
 
 export default {
   data: () => {
@@ -66,7 +66,9 @@ export default {
       WIN,
       LOSE,
       TIE,
-      PENALTY
+      PENALTY,
+      RED,
+      WHITE
       // showModal: true
     }
   },
@@ -79,28 +81,7 @@ export default {
   },
   methods: {
     addIppon (data) {
-      this.$store.commit(`round_robin/${ADD_IPPON}`, data)
-    },
-    removeIppon (data) {
-      this.$store.commit(`round_robin/${REMOVE_IPPON}`, data)
-    },
-    addPenalty (data) {
-      this.$store.commit(`round_robin/${ADD_PENALTY}`, data)
-    },
-    removePenalty (data) {
-      this.$store.commit(`round_robin/${REMOVE_PENALTY}`, data)
-    },
-    setWin (data) {
-      this.$store.commit(`round_robin/${SET_WIN}`, data)
-    },
-    setLose (data) {
-      this.$store.commit(`round_robin/${SET_LOSE}`, data)
-    },
-    setTie (data) {
-      this.$store.commit(`round_robin/${SET_TIE}`, data)
-    },
-    resetOutcome (data) {
-      this.$store.commit(`round_robin/${RESET_OUTCOME}`, data)
+      this.$store.commit(`team_match/${ADD_IPPON}`, data)
     }
   }
 }

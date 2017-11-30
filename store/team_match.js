@@ -1,6 +1,8 @@
 // import { WIN, LOSE, TIE, TEAMMATCH } from './shiai_constants'
 import { TEAMMATCH } from './shiai_constants'
 
+export const ADD_IPPON = 'ADD_IPPON'
+
 export const state = () => ({
   count: 0,
   team_white_participants: null,
@@ -12,6 +14,7 @@ export const state = () => ({
 
 export const mutations = {
   ADD_IPPON (state, data) {
+    console.log(data)
   },
   REMOVE_IPPON (state, data) {
   },
