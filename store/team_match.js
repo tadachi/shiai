@@ -14,6 +14,10 @@ export const state = () => ({
 
 export const mutations = {
   ADD_IPPON (state, data) {
+    const team = data.team
+    const player = data.player
+    const ippon = data.ippon
+    state.team_match_card[team][player].points.push(ippon)
     console.log(data)
   },
   REMOVE_IPPON (state, data) {
