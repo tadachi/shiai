@@ -8,9 +8,9 @@
             <div class="score-menu">
               <div class="has-text-black">({{n}}, {{m}})</div>
               <div>
-                <div class="wrap score-item" v-for="(ippon, key) in team_match_card[t_key][p_key].points" :key="key">
-                  <img class="top-right-hidden-small super" src="~/static/delete.svg">
-                  <img class="" :src="ippon + '.svg'">
+                <div class="wrap" v-for="(ippon, key) in team_match_card[t_key][p_key].points" :key="key">
+                  <img class="hidden-small super-small" src="~/static/delete.svg">
+                  <img class="icon-ippon" :src="ippon + '.svg'">
                 </div>
               </div>
               <!-- <div>
@@ -28,32 +28,32 @@
               </div> -->
             </div>
             <div class="points-menu">
-              <div class="wrap menu-item"  v-on:click="addIppon({player: p_key, team: t_key, ippon: MEN})">
-                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+              <div class="wrap"  v-on:click="addIppon({player: p_key, team: t_key, ippon: MEN})">
+                <img class="top-right-hidden-small-x super-small" src="~/static/add.svg">
                 <img class="icon-small" src="~/static/men.svg">
               </div>
-              <div class="wrap menu-item">
-                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+              <div class="wrap">
+                <img class="top-right-hidden-small-x super-small" src="~/static/add.svg">
                 <img class="icon-small" src="~/static/kote.svg">
               </div>
-              <div class="wrap menu-item">
-                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+              <div class="wrap">
+                <img class="top-right-hidden-small-x super-small" src="~/static/add.svg">
                 <img class="icon-small" src="~/static/dou.svg">
               </div>
-              <div class="wrap menu-item">
-                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+              <div class="wrap">
+                <img class="top-right-hidden-small-x super-small" src="~/static/add.svg">
                 <img class="icon-small" src="~/static/tsuki.svg">
               </div>
-              <div class="wrap menu-item">
-                <img class="top-right-hidden-small super-small" src="~/static/add.svg">
+              <div class="wrap">
+                <img class="top-right-hidden-small-x super-small" src="~/static/add.svg">
                 <img class="icon-small" src="~/static/penalty.svg">
               </div>
             </div>
             <div class="points-menu">
-              <div class="wrap menu-item">
+              <div class="wrap">
                 <img class="icon-small" src="~/static/win.svg">
               </div>
-              <div class="wrap menu-item">
+              <div class="wrap">
                 <img class="icon-small" src="~/static/lose.svg">
               </div>
               <div class="wrap menu-item">
@@ -110,7 +110,8 @@ export default {
 <style lang="scss" scoped>
 
 /* Scoped Globals */
-$screen-min-width: 1024px;
+// $screen-min-width: 1024px;
+$screen-min-width: 1px;
 $points-back-color: 'grey';
 $player-score-back-color: #121f1f;
 
@@ -127,15 +128,22 @@ $standard-height-desktop: 225px;
   margin: 0px;
   padding: 0px;
 
-  .top-right-hidden-small {
+  .hidden-small {
     position: absolute;
     /* Moves to to the right corner of image */
-    left: 13px;
-    top: 0px;
     z-index: inherit;
     opacity: 0;
   }
-  &:hover .top-right-hidden-small {
+  .top-right-hidden-small-x {
+    @extend .hidden-small;
+    /* Moves to to the right corner of image */
+    left: 13px;
+    top: 0px;
+  }
+  &:hover .hidden-small {
+    opacity: 1;
+  }
+  &:hover .top-right-hidden-small-x {
     opacity: 1;
   }
 }
@@ -168,6 +176,11 @@ $standard-height-desktop: 225px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  .icon-ippon {
+    width: 30px;
+    height: 30px;
   }
 
   .menu-item {
