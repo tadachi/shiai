@@ -2,13 +2,13 @@
   <div v-if="show" class="section background modifiers">
     <div class="table-container">
       <div class="table-cells-container" v-for="(n, p_key) in (count/2)" :key="p_key">
-        <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_red_participants[key]}} {{key}}</div>
+        <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_red_participants[p_key]}} {{p_key}}</div>
         <div class="points-cell border-black standard-size" v-for="(m, t_key) in 2" :key="t_key">
           <div else class="points-cell standard-size has-text-centered border-black">
             <div class="score-menu">
               <div class="has-text-black">({{n}}, {{m}})</div>
               <div>
-                <div class="wrap" v-for="(ippon, key) in team_match_card[t_key][p_key].points" :key="key">
+                <div class="wrap" v-for="(ippon, index) in team_match_card[t_key][p_key].points" :key="index" v-on:click="removeIppon({player: p_key, team: t_key, index: index})">
                   <img class="hidden-small super-small" src="~/static/delete.svg">
                   <img class="icon-ippon" :src="ippon + '.svg'">
                 </div>
@@ -28,7 +28,7 @@
               </div> -->
             </div>
             <div class="points-menu">
-              <div class="wrap"  v-on:click="addIppon({player: p_key, team: t_key, ippon: MEN})">
+              <div class="wrap" v-on:click="addIppon({player: p_key, team: t_key, ippon: MEN})">
                 <img class="top-right-hidden-small-x super-small" src="~/static/add.svg">
                 <img class="icon-small" src="~/static/men.svg">
               </div>
@@ -65,7 +65,7 @@
             </div>
           </div>
         </div>
-        <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_white_participants[key]}} {{key}}</div>
+        <div style="background-color: #cfd2d2" class="player-cell has-text-centered border-black header-size">{{team_white_participants[p_key]}} {{p_key}}</div>
       </div>
     </div>
 
@@ -74,7 +74,7 @@
 
 <script>
 import { MEN, KOTE, DOU, TSUKI, WIN, LOSE, TIE, PENALTY, RED, WHITE } from '../store/shiai_constants'
-import { ADD_IPPON } from '../store/team_match'
+import { ADD_IPPON, REMOVE_IPPON } from '../store/team_match'
 
 export default {
   data: () => {
@@ -102,6 +102,9 @@ export default {
   methods: {
     addIppon (data) {
       this.$store.commit(`team_match/${ADD_IPPON}`, data)
+    },
+    removeIppon (data) {
+      this.$store.commit(`team_match/${REMOVE_IPPON}`, data)
     }
   }
 }

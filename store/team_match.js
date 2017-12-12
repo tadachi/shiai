@@ -2,6 +2,7 @@
 import { TEAMMATCH } from './shiai_constants'
 
 export const ADD_IPPON = 'ADD_IPPON'
+export const REMOVE_IPPON = 'REMOVE_IPPON'
 
 export const state = () => ({
   count: 0,
@@ -17,10 +18,17 @@ export const mutations = {
     const team = data.team
     const player = data.player
     const ippon = data.ippon
-    state.team_match_card[team][player].points.push(ippon)
-    console.log(data)
+    if (state.team_match_card[team][player].points.length < 2) {
+      state.team_match_card[team][player].points.push(ippon)
+    }
   },
   REMOVE_IPPON (state, data) {
+    const team = data.team
+    const player = data.player
+    const index = data.index
+    if (state.team_match_card[team][player].points.length > 0) {
+      state.team_match_card[team][player].points.splice(index, 1)
+    }
   },
   SUBMIT_SHIAI (state, data) {
     if (data.type === TEAMMATCH) {
